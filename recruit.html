@@ -1059,7 +1059,7 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
     <div class="card">
         <p class="out-note">Copy each message and send it in your recruitment ticket. Please avoid modifying the generated output. If you have additional comments send them as additional messages in your ticket.</p>
         <div class="actions">
-            <button type="button" class="secondary" id="fillExampleBtn">Fill Example Answers</button>
+            <button type="button" class="secondary hidden" id="fillExampleBtn">Fill Example Answers</button>
         </div>
         <div class="out-header">
             <strong>Generated Output</strong>
@@ -1076,6 +1076,7 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
 
 <script>
     const DISCORD_LIMIT = 2000;
+    const hasDevQueryParam = new URLSearchParams(window.location.search).has("dev");
 
     const textFieldIds = ["q3", "q4", "q5", "q6Note", "q7Note", "q8"];
     const inlineClearFieldIds = ["q0", "q1", "q2", "q3", "q4", "q5", "q6Note", "q7Note", "q8"];
@@ -1770,6 +1771,7 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
         });
     });
 
+    el("fillExampleBtn").classList.toggle("hidden", !hasDevQueryParam);
     el("fillExampleBtn").addEventListener("click", fillExampleAnswers);
 
     document.addEventListener("mouseup", () => {
