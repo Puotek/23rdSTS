@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const base = import.meta.env.BASE_URL;
+const withBase = (path = "") => `${base.replace(/\/?$/, "/")}${path.replace(/^\//, "")}`;
+---
+
+<BaseLayout activePage="home" title="23rd Special Tactics Squadron">
+    <section
+            class="banner"
+            style={`background: url("${withBase("assets/banner.png")}") center / cover no-repeat fixed;`}
+    >
+        <div class="banner-content">
+            <div class="banner-logo">
+                <img src={withBase("assets/logo.png")} alt="23rd STS Emblem"/>
+            </div>
+
+            <h1>23rd Special Tactics Squadron</h1>
+            <p class="banner-subtitle">ARMA 3 SUPPORT UNIT // ESTABLISHED 2022</p>
+            <div class="banner-buttons">
+                <a class="btn btn-primary" href={withBase("apply/")}>APPLY</a>
+                <a class="btn btn-secondary" href={withBase("discord/")}>DISCORD</a>
+            </div>
+        </div>
+
+        <span class="banner-chevron material-symbols-outlined">keyboard_arrow_down</span>
+    </section>
+
+</BaseLayout>
+
+<script>
+    const header: HTMLElement | null = document.querySelector("header");
+
+    function updateHeader(): void {
+        if (!header) return;
+
+        if (window.scrollY === 0) {
+            header.classList.add("at-top");
+        } else {
+            header.classList.remove("at-top");
+        }
+    }
+
+    updateHeader();
+    window.addEventListener("scroll", updateHeader);
+</script>

@@ -191,14 +191,9 @@ main {
     padding-bottom: var(--space-14);
     text-align: center;
     position: relative;
-    background: url("./assets/banner.png") center / cover no-repeat fixed;
     overflow: hidden;
     opacity: 0;
     animation: fadeIn 1.2s ease forwards;
-}
-
-.temp-blank-space {
-    min-height: 100vh;
 }
 
 .banner-content {
