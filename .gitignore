@@ -1,8 +1,6 @@
 # git rm -r -f --cached .
 # git add .
 
-example.html
-.codex
 *.iml
 .idea/*
 .git/*
