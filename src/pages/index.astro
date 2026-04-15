@@ -16,7 +16,7 @@ const withBase = (path = "") => `${base.replace(/\/?$/, "/")}${path.replace(/^\/
             </div>
 
             <h1>23rd Special Tactics Squadron</h1>
-            <p class="banner-subtitle">ARMA 3 SUPPORT UNIT // ESTABLISHED 2023</p>
+            <p class="banner-subtitle">ARMA 3 ENABLER UNIT // ESTABLISHED 2023</p>
             <div class="banner-buttons">
                 <a class="btn btn-primary" href={withBase("apply/")}>APPLY</a>
                 <a class="btn btn-secondary" href={withBase("discord/")}>DISCORD</a>
@@ -26,6 +26,109 @@ const withBase = (path = "") => `${base.replace(/\/?$/, "/")}${path.replace(/^\/
         <span class="banner-chevron material-symbols-outlined">keyboard_arrow_down</span>
     </section>
 
+    <section class="overview-section">
+        <div class="section-block about-section">
+            <div>
+                <h2>About 23rd Special Tactics Squadron</h2>
+                <p>
+                    We are an enabler unit specializing in pararescue and Air Force Special Warfare. As a combat support group, we integrate directly with other milsim units, either by attaching to their ground elements or by deploying as a separate pararescue element. We insert and assist teams to prevent casualties and to restore combat initiative.
+                    <br/><br/>
+                    We are strongly focused on the Advanced Combat Medicine Arma 3 mod by Blue. We strive to be the best at what we do, and we are proud to be leading experts in both ACM practical knowledge and theory.
+                </p>
+            </div>
+
+            <div class="about-logo">
+                <img src={withBase("assets/logo.png")} alt="23rd STS Emblem"/>
+            </div>
+        </div>
+
+        <div class="section-block">
+            <h2>What we offer</h2>
+
+            <div class="offer-list">
+                <article class="offer-item">
+                    <p class="offer-eyebrow">PUBLIC DOCUMENTATION</p>
+                    <h3>Public Medical Documentation on ACM</h3>
+                    <p>
+                        We share our knowledge to help the player base avoid common ACM medical malpractice.
+                    </p>
+                </article>
+                <article class="offer-item">
+                    <p class="offer-eyebrow">PUBLIC LECTURES ON ACM</p>
+                    <h3>Medical School</h3>
+                    <p>
+                        We periodically host public-facing lectures on in-depth ACM topics, where we dive into the code and the inner workings of the systems that affect players during gameplay.
+                    </p>
+                </article>
+                <article class="offer-item">
+                    <p class="offer-eyebrow">TRAINING AND ADVISORY SUPPORT</p>
+                    <h3>Medical Training and Qualifications</h3>
+                    <p>
+                        We have a series of medical qualification levels that we both train for and use to test trainees' proficiency. We train partner medics through these qualifications upon request to make sure we have reliable medics in the field. We can also send our own instructors to other units to lead dedicated classes tailored to your unit.
+                    </p>
+                </article>
+
+
+                <article class="offer-item">
+                    <p class="offer-eyebrow">KAT → ACM TRANSITION SUPPORT</p>
+                    <h3>Supporting units moving from KAT to ACM</h3>
+                    <p>
+                        We can advise on settings, configuration, and important differences. We can help by hosting dedicated trainings for medics transitioning from KAT. We also help units strengthen their medical manpower during transition periods.
+                    </p>
+                </article>
+
+                <article class="offer-item">
+                    <p class="offer-eyebrow">DIRECT OPERATIONAL SUPPORT</p>
+                    <h3>Pararescue</h3>
+                    <p>
+                        We provide directly attached PJs to deployed ground elements, just like our real-life STS counterpart, as well as standby rotary CSAR and MEDEVAC elements closer to an RQS-style rescue package. That capability can be backed by our own pilots and built to integrate with other units when needed.
+                    </p>
+                </article>
+
+                <article class="offer-item">
+                    <p class="offer-eyebrow">DIRECT OPERATIONAL SUPPORT</p>
+                    <h3>Air-Ground Integration</h3>
+                    <p>
+                        Units that need terminal attack control, fires integration, or stronger coordination between ground forces and aviation can be reinforced by our Combat Control and Tactical Air Control Party personnel.
+                    </p>
+                </article>
+
+
+                <article class="offer-item">
+                    <p class="offer-eyebrow">DIRECT OPERATIONAL SUPPORT</p>
+                    <h3>CBRN Specialists</h3>
+                    <p>
+                        We can provide emergency management and contamination response capability for scenarios that require a dedicated CBRN element.
+                    </p>
+                </article>
+
+                <article class="offer-item">
+                    <p class="offer-eyebrow">DIRECT OPERATIONAL SUPPORT</p>
+                    <h3>EOD Specialists</h3>
+                    <p>
+                        We have EOD specialists trained in the IEDD Notebook mod and in the tactics and considerations of explosive ordnance disposal.
+                    </p>
+                </article>
+
+                <article class="offer-item">
+                    <p class="offer-eyebrow">DIRECT OPERATIONAL SUPPORT</p>
+                    <h3>UAV Operators</h3>
+                    <p>
+                        We can provide operators for unmanned aerial support during operations.
+                    </p>
+                </article>
+
+                <article class="offer-item">
+                    <p class="offer-eyebrow">DIRECT OPERATIONAL SUPPORT</p>
+                    <h3>Special Reconnaissance</h3>
+                    <p>
+                        Recon-focused personnel can support observation, target development, and pre-assault shaping
+                        for units that need a broader specialist package.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
 </BaseLayout>
 
 <script>

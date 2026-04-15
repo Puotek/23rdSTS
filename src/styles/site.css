@@ -7,6 +7,16 @@
     --color-text-darker: #18181b;
     --color-panel-dark: #0f0f0f;
     --color-surface-light: #f4f4f5;
+    --color-surface-mid: oklch(0.708 0 0);
+    --color-accent-soft: oklch(0.708 0 0);
+    --color-panel-strong: rgba(9, 9, 11, 0.78);
+    --color-panel-soft: rgba(255, 255, 255, 0.05);
+    --color-content-background: oklch(0.145 0 0);
+    --color-content-card: oklch(0.205 0 0);
+    --color-content-muted: oklch(0.269 0 0);
+    --color-content-foreground: oklch(0.985 0 0);
+    --color-content-muted-foreground: oklch(0.708 0 0);
+    --color-content-border: oklch(1 0 0 / 10%);
 
     --color-white-85: rgba(255, 255, 255, 0.85);
     --color-white-72: rgba(255, 255, 255, 0.72);
@@ -32,20 +42,29 @@
     --space-4: 16px;
     --space-4-5: 18px;
     --space-5: 20px;
+    --space-6: 24px;
     --space-8: 32px;
+    --space-10: 40px;
     --space-12: 48px;
     --space-14: 56px;
+    --space-16: 64px;
+    --space-18: 72px;
 
     --text-xs: 12px;
     --text-sm: 14px;
+    --text-base: 16px;
     --text-lg: 18px;
+    --text-xl: 22px;
     --text-4xl: 40px;
     --text-5xl: 54px;
 
     --radius-md: 6px;
+    --radius-lg: 18px;
+    --radius-xl: 28px;
 
     --border-light: 1px solid var(--color-white-08);
     --shadow-button-hover: 0 10px 24px rgba(0, 0, 0, 0.22);
+    --shadow-panel: 0 24px 50px rgba(0, 0, 0, 0.28);
 
     --transition-fast: 0.2s ease;
     --transition-header: 0.35s ease;
@@ -354,9 +373,117 @@ main {
     text-transform: uppercase;
 }
 
+.overview-section {
+    padding: var(--space-16) var(--space-12);
+    background: var(--color-content-background);
+    display: grid;
+    gap: var(--space-16);
+}
+
+.section-block {
+    width: min(1280px, 100%);
+    margin: 0 auto;
+}
+
+.section-block h2 {
+    margin-bottom: var(--space-5);
+    font-size: 40px;
+    line-height: 1.15;
+    letter-spacing: 0.03em;
+}
+
+.section-block > p {
+    color: var(--color-content-muted-foreground);
+    font-size: 17px;
+    line-height: 1.85;
+}
+
+.about-section {
+    display: grid;
+    grid-template-columns: minmax(0, 1.75fr) minmax(220px, 0.8fr);
+    gap: var(--space-10);
+    align-items: center;
+}
+
+.about-section p {
+    color: var(--color-content-muted-foreground);
+    font-size: 17px;
+    line-height: 1.85;
+}
+
+.about-logo {
+    display: flex;
+    justify-content: center;
+}
+
+.about-logo img {
+    width: min(100%, 260px);
+    height: auto;
+    display: block;
+    opacity: 0.9;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+}
+
+.offer-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+}
+
+.offer-item {
+    padding: var(--space-6);
+    border: var(--border-light);
+    border-radius: 12px;
+    background: var(--color-overlay-dark);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14);
+}
+
+.offer-eyebrow {
+    margin-bottom: var(--space-2);
+    color: var(--color-surface-mid);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.offer-item h3 {
+    margin-bottom: var(--space-3);
+    font-size: 26px;
+    line-height: 1.25;
+    letter-spacing: 0.02em;
+}
+
+.offer-item p:last-child {
+    color: var(--color-content-muted-foreground);
+    font-size: 17px;
+    line-height: 1.8;
+}
+
 @media (max-width: 900px) {
     .banner-logo img {
         width: 135px;
+    }
+
+    .overview-section {
+        padding: var(--space-14) var(--space-5);
+    }
+
+    .offer-list {
+        grid-template-columns: 1fr;
+    }
+
+    .about-section {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+    }
+
+    .about-logo {
+        order: -1;
     }
 }
 
@@ -367,6 +494,26 @@ main {
 
     .banner-buttons {
         flex-direction: column;
+    }
+
+    header {
+        padding: 0 var(--space-5);
+    }
+
+    .logo-text {
+        display: none;
+    }
+
+    nav ul {
+        gap: var(--space-4);
+    }
+
+    .section-block h2 {
+        font-size: 34px;
+    }
+
+    .offer-item h3 {
+        font-size: 23px;
     }
 }
 
