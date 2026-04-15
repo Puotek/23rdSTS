@@ -28,27 +28,27 @@ const withBase = (path = "") => `${base.replace(/\/?$/, "/")}${path.replace(/^\/
 
     <form id="appForm" class="card" onsubmit="return false;" novalidate>
         <!-- Q0 Name -->
-        <div class="row field" id="field-q0">
+        <div class="row field" id="field-q-name">
             <div>
-                <label for="q0">What name would you like to use?</label>
-                <div class="input-clear-wrap" data-inline-wrap="q0">
-                    <input id="q0" type="text" maxlength="32" placeholder="J. Smith"/>
-                    <button type="button" class="inline-clear-btn" data-inline-clear="q0">
+                <label for="q-name">What name would you like to use?</label>
+                <div class="input-clear-wrap" data-inline-wrap="q-name">
+                    <input id="q-name" type="text" maxlength="32" placeholder="J. Smith"/>
+                    <button type="button" class="inline-clear-btn" data-inline-clear="q-name">
                         &times;
                     </button>
                 </div>
                 <span class="desc">Please choose a nickname in the <code>A. Name</code> format (max 32 characters) (you can update your discord nickname as well)</span>
-                <div class="error" id="err-q0"></div>
+                <div class="error" id="err-q-name"></div>
             </div>
         </div>
 
         <!-- Q1 -->
-        <div class="row field" id="field-q1">
+        <div class="row field" id="field-q-steamid">
             <div>
-                <label for="q1">What is your SteamID64?</label>
-                <div class="input-clear-wrap" data-inline-wrap="q1">
-                    <input id="q1" type="text" inputmode="numeric" maxlength="17" placeholder="76561198000000000"/>
-                    <button type="button" class="inline-clear-btn" data-inline-clear="q1">
+                <label for="q-steamid">What is your SteamID64?</label>
+                <div class="input-clear-wrap" data-inline-wrap="q-steamid">
+                    <input id="q-steamid" type="text" inputmode="numeric" maxlength="17" placeholder="76561198000000000"/>
+                    <button type="button" class="inline-clear-btn" data-inline-clear="q-steamid">
                         &times;
                     </button>
                 </div>
@@ -58,55 +58,55 @@ const withBase = (path = "") => `${base.replace(/\/?$/, "/")}${path.replace(/^\/
             • Alternative:
             <a href="https://steamid.io/" target="_blank" rel="noopener noreferrer">steamid.io</a>
           </span>
-                <div class="error" id="err-q1"></div>
+                <div class="error" id="err-q-steamid"></div>
             </div>
         </div>
 
         <!-- Q2 -->
-        <div class="row field" id="field-q2">
+        <div class="row field" id="field-q-hours">
             <div>
-                <label for="q2">How many hours do you have in Arma 3?</label>
-                <div class="input-clear-wrap" data-inline-wrap="q2">
-                    <input id="q2" type="number" min="0" step="1" placeholder="2137"/>
-                    <button type="button" class="inline-clear-btn" data-inline-clear="q2">
+                <label for="q-hours">How many hours do you have in Arma 3?</label>
+                <div class="input-clear-wrap" data-inline-wrap="q-hours">
+                    <input id="q-hours" type="number" min="0" step="1" placeholder="2137"/>
+                    <button type="button" class="inline-clear-btn" data-inline-clear="q-hours">
                         &times;
                     </button>
                 </div>
                 <span class="desc">Whole number</span>
-                <div class="error" id="err-q2"></div>
+                <div class="error" id="err-q-hours"></div>
             </div>
         </div>
 
         <!-- Q3 -->
-        <div class="row field" id="field-q3">
+        <div class="row field" id="field-q-history">
             <div>
-                <label for="q3">Please fully describe your Arma 3 experience</label>
-                <div class="input-clear-wrap" data-inline-wrap="q3">
-                    <textarea id="q3"
+                <label for="q-history">Please fully describe your Arma 3 experience</label>
+                <div class="input-clear-wrap" data-inline-wrap="q-history">
+                    <textarea id="q-history"
                     placeholder="Playing basically since release. At first I played on public I&A servers, mostly as a pilot or squad lead. Later on I played with a group of friends on self-hosted zeus sessions. Than I joined a unit called BRO that hosted a public I&A server. It fell apart due to the owner misusing donations. After that I had a long break from Arma. After coming back I started looking a lot for a long-term unit to play with. I went through quite a lot of different units without staying too long. Currently I found a few units I somewhat actively play with, I will list the below. I also played a lot of Mike Force. Throughout I got a lot of expirience with a ton of different mods and did quite a lot of all the main stuff. I also played a few times in PvP events such as Friday Fight Night.
 Some units I was in:
 - Unit ABC: pretty serious; they played as a MEU and I filled a corpsman role (KAT); left since I was unhappy with the chaos there was and staff
 - Another Unit: hardcore milsim; I was in a trainer and command role; the main mission maker lost motivation and the unit slowly fell apart"></textarea>
-                    <button type="button" class="inline-clear-btn" data-inline-clear="q3">
+                    <button type="button" class="inline-clear-btn" data-inline-clear="q-history">
                         &times;
                     </button>
                 </div>
                 <span class="desc">Include unit history (short unit description + role + duration + serious/casual) and overall experience (KOH / I&amp;A / Mike Force / Public Zeus, how much, and what roles).</span>
-                <div class="error" id="err-q3"></div>
+                <div class="error" id="err-q-history"></div>
             </div>
         </div>
 
         <!-- Q4 -->
-        <div class="row field" id="field-q4">
+        <div class="row field" id="field-q-units">
             <div>
-                <label for="q4">Are you currently in any Arma 3 units?</label>
-                <div class="input-clear-wrap" data-inline-wrap="q4">
-                    <textarea id="q4"
+                <label for="q-units">Are you currently in any Arma 3 units?</label>
+                <div class="input-clear-wrap" data-inline-wrap="q-units">
+                    <textarea id="q-units"
                               placeholder="Currently in:
 - Arma Addicts: rather casual unit with a very good mission maker; Im in a Staff role there and usually also play as the platoon leader or squad leader on the ground; They play every Sat at ~2000 CET, i try to join regularly;
 - Sigma Security Group: a serious and big group; they play as a PMC; Im in a avg operator role there, but sometimes play as team lead as well, mostly as a medic tho, they use KAT; They dont have a set schedule and op times vary and are dependent on multiple mission makers there, whether they have something and when they want to host;
 - MTF Epsilon-6: a rather small and messy SCP unit; I usually play there as a medic (KAT); I haven't played with them for a while now"></textarea>
-                    <button type="button" class="inline-clear-btn" data-inline-clear="q4">
+                    <button type="button" class="inline-clear-btn" data-inline-clear="q-units">
                         &times;
                     </button>
                 </div>
@@ -117,109 +117,109 @@ Some units I was in:
                     <br/>- what position do you fill
                     <br/>- do they prohibit dual-clanning
                 </span>
-                <div class="error" id="err-q4"></div>
+                <div class="error" id="err-q-units"></div>
             </div>
         </div>
 
-        <div class="row field" id="field-q4dual">
+        <div class="row field" id="field-q-dualclan">
             <div>
                 <span class="desc">None of the units I'm actively in is against dual-clanning.</span>
                 <div class="agree-line">
-                    <input id="q4dual" type="checkbox" class="agree-input"/>
-                    <label for="q4dual" class="agree-tag">I confirm</label>
+                    <input id="q-dualclan" type="checkbox" class="agree-input"/>
+                    <label for="q-dualclan" class="agree-tag">I confirm</label>
                 </div>
-                <div class="error" id="err-q4dual"></div>
+                <div class="error" id="err-q-dualclan"></div>
             </div>
         </div>
 
         <!-- Q5 -->
-        <div class="row field" id="field-q5">
+        <div class="row field" id="field-q-games">
             <div>
-                <label for="q5">Briefly describe your experience with other milsim games besides Arma 3</label>
-                <div class="input-clear-wrap" data-inline-wrap="q5">
-                    <textarea id="q5" placeholder="Yeah:
+                <label for="q-games">Briefly describe your experience with other milsim games besides Arma 3</label>
+                <div class="input-clear-wrap" data-inline-wrap="q-games">
+                    <textarea id="q-games" placeholder="Yeah:
 - Arma 2: 100h; I dont remember it much
 - Reforger: 65h; I played mostly on public servers on launch, but Im not a fan
 - Squad: 1670h; I was part of a well-known polish clan; Was a high-level staff there; We played in clan-vs-clan games and tournaments; Most of my time was rather in public server, where I played as a squad lead or vehicle crew lead, I also did quite a bit of flying; I left after the ICO updates
 - Post Scriptum/Squad 44: 171h; Similar to normal squad, but was not in any clan; played a lot on public servers as squad lead or vehicle crew
 - Ready or Not: 185h; Played since early access; Pretty experienced with the game and did quite some serious runs
 I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762h), CoD Warzone (320h) and some other less known shooters shortly"></textarea>
-                    <button type="button" class="inline-clear-btn" data-inline-clear="q5">
+                    <button type="button" class="inline-clear-btn" data-inline-clear="q-games">
                         &times;
                     </button>
                 </div>
                 <span class="desc">Reforger / Squad / RoN (hours, roles, etc.).</span>
-                <div class="error" id="err-q5"></div>
+                <div class="error" id="err-q-games"></div>
             </div>
         </div>
 
         <!-- Q6 -->
-        <div class="row field" id="field-q6">
+        <div class="row field" id="field-q-time">
             <div>
                 <label>Weekly availability</label>
                 <span class="desc">Select a generic times during the week that you are available to play ops rather regularly. Click or click-and-drag to mark available time.
                     <br/>Time is in your local time zone in 30 min blocks.</span>
-                <div class="availability-grid" id="q6Grid">
-                    <div class="availability-table" id="q6Table"></div>
+                <div class="availability-grid" id="q-time-grid">
+                    <div class="availability-table" id="q-time-table"></div>
                 </div>
-                <div class="input-clear-wrap" data-inline-wrap="q6Note">
-                    <textarea id="q6Note" placeholder="Optional notes: exceptions, weeks you are busy, disclaimers about irregular work schedule, etc."></textarea>
-                    <button type="button" class="inline-clear-btn" data-inline-clear="q6Note">
+                <div class="input-clear-wrap" data-inline-wrap="q-time-note">
+                    <textarea id="q-time-note" placeholder="Optional notes: exceptions, weeks you are busy, disclaimers about irregular work schedule, etc."></textarea>
+                    <button type="button" class="inline-clear-btn" data-inline-clear="q-time-note">
                         &times;
                     </button>
                 </div>
-                <div class="error" id="err-q6"></div>
+                <div class="error" id="err-q-time"></div>
             </div>
         </div>
 
         <!-- Q7 -->
-        <div class="row field" id="field-q7">
+        <div class="row field" id="field-q-mods">
             <div>
                 <label>What gameplay-affecting mods have you played with?</label>
                 <span class="desc">Select all mods you are familiar with. You can describe the extent of you knowledge in the note or mention additional mods.</span>
-                <div class="plain-options" id="q7ModsWrap">
-                    <div class="plain-option"><input id="q7Mod-ace" name="q7Mods" type="checkbox" value="ACE"/><label
-                            for="q7Mod-ace">ACE</label></div>
-                    <div class="plain-option"><input id="q7Mod-tfar" name="q7Mods" type="checkbox" value="TFAR"/><label
-                            for="q7Mod-tfar">TFAR</label></div>
-                    <div class="plain-option"><input id="q7Mod-acre" name="q7Mods" type="checkbox" value="ACRE"/><label
-                            for="q7Mod-acre">ACRE</label></div>
-                    <div class="plain-option"><input id="q7Mod-acm" name="q7Mods" type="checkbox" value="ACM"/><label
-                            for="q7Mod-acm">ACM</label></div>
-                    <div class="plain-option"><input id="q7Mod-kat" name="q7Mods" type="checkbox" value="KAT"/><label
-                            for="q7Mod-kat">KAT</label></div>
-                    <div class="plain-option"><input id="q7Mod-ade" name="q7Mods" type="checkbox" value="ADE"/><label
-                            for="q7Mod-ade">ADE</label></div>
-                    <div class="plain-option"><input id="q7Mod-iedd" name="q7Mods" type="checkbox" value="IEDD"/><label
-                            for="q7Mod-iedd">IEDD</label></div>
-                    <div class="plain-option"><input id="q7Mod-itn" name="q7Mods" type="checkbox" value="ITN"/><label
-                            for="q7Mod-itn">ITN</label></div>
-                    <div class="plain-option"><input id="q7Mod-ctab" name="q7Mods" type="checkbox" value="CTAB"/><label
-                            for="q7Mod-ctab">CTAB</label></div>
-                    <div class="plain-option"><input id="q7Mod-hatchet" name="q7Mods" type="checkbox"
-                                                     value="HATCHET"/><label for="q7Mod-hatchet">HATCHET</label></div>
+                <div class="plain-options" id="q-mods-wrap">
+                    <div class="plain-option"><input id="q-mod-ace" name="q-mods" type="checkbox" value="ACE"/><label
+                            for="q-mod-ace">ACE</label></div>
+                    <div class="plain-option"><input id="q-mod-tfar" name="q-mods" type="checkbox" value="TFAR"/><label
+                            for="q-mod-tfar">TFAR</label></div>
+                    <div class="plain-option"><input id="q-mod-acre" name="q-mods" type="checkbox" value="ACRE"/><label
+                            for="q-mod-acre">ACRE</label></div>
+                    <div class="plain-option"><input id="q-mod-acm" name="q-mods" type="checkbox" value="ACM"/><label
+                            for="q-mod-acm">ACM</label></div>
+                    <div class="plain-option"><input id="q-mod-kat" name="q-mods" type="checkbox" value="KAT"/><label
+                            for="q-mod-kat">KAT</label></div>
+                    <div class="plain-option"><input id="q-mod-ade" name="q-mods" type="checkbox" value="ADE"/><label
+                            for="q-mod-ade">ADE</label></div>
+                    <div class="plain-option"><input id="q-mod-iedd" name="q-mods" type="checkbox" value="IEDD"/><label
+                            for="q-mod-iedd">IEDD</label></div>
+                    <div class="plain-option"><input id="q-mod-itn" name="q-mods" type="checkbox" value="ITN"/><label
+                            for="q-mod-itn">ITN</label></div>
+                    <div class="plain-option"><input id="q-mod-ctab" name="q-mods" type="checkbox" value="CTAB"/><label
+                            for="q-mod-ctab">CTAB</label></div>
+                    <div class="plain-option"><input id="q-mod-hatchet" name="q-mods" type="checkbox"
+                                                     value="HATCHET"/><label for="q-mod-hatchet">HATCHET</label></div>
                 </div>
-                <div class="input-clear-wrap" data-inline-wrap="q7Note">
-                    <textarea id="q7Note"
-                             
+                <div class="input-clear-wrap" data-inline-wrap="q-mods-note">
+                    <textarea id="q-mods-note"
+
                               placeholder="Optional note: how expirienced you are with KAT/ACM for example or extra mods you would like to mention that introduce gameplay mechanics and are not listed."></textarea>
-                    <button type="button" class="inline-clear-btn" data-inline-clear="q7Note">
+                    <button type="button" class="inline-clear-btn" data-inline-clear="q-mods-note">
                         &times;
                     </button>
                 </div>
-                <div class="error" id="err-q7"></div>
+                <div class="error" id="err-q-mods"></div>
             </div>
         </div>
 
         <!-- Q8 -->
-        <div class="row field" id="field-q8">
+        <div class="row field" id="field-q-afsc-note">
             <div>
-                <label for="q8">What is your experience with the AFSC you are applying for?</label>
+                <label for="q-afsc-note">What is your experience with the AFSC you are applying for?</label>
                 <span class="desc">Select same AFSC as you sent in <code>#requests</code> and describe your relevant experience in Arma related to it and your confidence in it.</span>
-                <input id="q8Afsc" type="hidden" value=""/>
-                <input id="q8AfscName" type="hidden" value=""/>
-                <div class="discord-select" id="q8AfscSelect">
-                    <button type="button" class="discord-select-trigger" id="q8AfscTrigger">Select AFSC</button>
+                <input id="q-afsc" type="hidden" value=""/>
+                <input id="q-afsc-name" type="hidden" value=""/>
+                <div class="discord-select" id="q-afsc-select">
+                    <button type="button" class="discord-select-trigger" id="q-afsc-trigger">Select AFSC</button>
                     <div class="discord-select-menu">
                         <button type="button" class="discord-select-option" data-afsc="11HX"
                                 data-afsc-name="Rescue Pilot">11HX - Rescue Pilot
@@ -253,28 +253,28 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
                         </button>
                     </div>
                 </div>
-                <div class="input-clear-wrap" data-inline-wrap="q8">
-                    <textarea id="q8" placeholder="An example note to Rescue Pilot AFSC would be:&#10;I have a lot of flight hours in public servers and I did also do quite a bit of flying in a few units + I practiced a lot my self. I also did most of the Vanilla Time Trials for flying on at least silver. Im confident in my flying skills and am able to fly smooth. I havent really had expirience with 9-lines and that stuff tho. I fly SFM from fully first-person usually. I dont have a stick, I just fly keyboard."></textarea>
-                    <button type="button" class="inline-clear-btn" data-inline-clear="q8">
+                <div class="input-clear-wrap" data-inline-wrap="q-afsc-note">
+                    <textarea id="q-afsc-note" placeholder="An example note to Rescue Pilot AFSC would be:&#10;I have a lot of flight hours in public servers and I did also do quite a bit of flying in a few units + I practiced a lot my self. I also did most of the Vanilla Time Trials for flying on at least silver. Im confident in my flying skills and am able to fly smooth. I havent really had expirience with 9-lines and that stuff tho. I fly SFM from fully first-person usually. I dont have a stick, I just fly keyboard."></textarea>
+                    <button type="button" class="inline-clear-btn" data-inline-clear="q-afsc-note">
                         &times;
                     </button>
                 </div>
-                <div class="error" id="err-q8"></div>
+                <div class="error" id="err-q-afsc-note"></div>
             </div>
         </div>
 
         <!-- Q10 -->
-        <div class="row field" id="field-q10">
+        <div class="row field" id="field-q-english">
             <div>
-                <label for="q10">How would you describe your English proficiency?</label>
+                <label for="q-english">How would you describe your English proficiency?</label>
                 <div class="scale-wrap">
                     <div class="scale-top">
                         <span>"I no english"</span>
-                        <span class="scale-value"><span id="q10Value">5</span>/10</span>
+                        <span class="scale-value"><span id="q-english-value">5</span>/10</span>
                         <span>Fluent and good speaker</span>
                     </div>
-                    <input id="q10" type="hidden" value="5"/>
-                    <div class="q10-boxes" id="q10Boxes">
+                    <input id="q-english" type="hidden" value="5"/>
+                    <div class="q10-boxes" id="q-english-boxes">
                         <button type="button" class="q10-box" data-q10-score="1">1</button>
                         <button type="button" class="q10-box" data-q10-score="2">2</button>
                         <button type="button" class="q10-box" data-q10-score="3">3</button>
@@ -288,46 +288,46 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
                     </div>
                 </div>
                 <span class="desc">Rate yourself taking into account speaking clarity, how well others understand you, and your comfort with spoken/written comms and briefings.</span>
-                <div class="error" id="err-q10"></div>
+                <div class="error" id="err-q-english"></div>
             </div>
         </div>
 
         <!-- Q9 checkbox -->
-        <div class="row field" id="field-q9">
+        <div class="row field" id="field-q-downtime">
             <div>
                 <label>Downtime Disclaimer</label>
                 <span class="desc">Do you understand how much downtime and how little gameplay you may experience in your AFSC? Are you able to patiently wait for short but intense moments? Are you aware you may go through entire ops as PJ and not be called once?</span>
                 <div class="agree-line">
-                    <input id="q9" type="checkbox" class="agree-input"/>
-                    <label for="q9" class="agree-tag">I understand and won't excessively whine about ops being boring</label>
+                    <input id="q-downtime" type="checkbox" class="agree-input"/>
+                    <label for="q-downtime" class="agree-tag">I understand and won't excessively whine about ops being boring</label>
                 </div>
-                <div class="error" id="err-q9"></div>
+                <div class="error" id="err-q-downtime"></div>
             </div>
         </div>
 
         <!-- Q11 checkbox -->
-        <div class="row field" id="field-q11">
+        <div class="row field" id="field-q-inactivity">
             <div>
                 <label>Inactivity Disclaimer</label>
                 <span class="desc">We will not babysit you. We expect you to take initiative to schedule training and complete your pipeline. Long inactivity without communication or lack of initiative may result in removal. Do you understand?</span>
                 <div class="agree-line">
-                    <input id="q11" type="checkbox" class="agree-input"/>
-                    <label for="q11" class="agree-tag">I understand and will take initiative to complete the pipeline and inform command if I need to take a LOA</label>
+                    <input id="q-inactivity" type="checkbox" class="agree-input"/>
+                    <label for="q-inactivity" class="agree-tag">I understand and will take initiative to complete the pipeline and inform command if I need to take a LOA</label>
                 </div>
-                <div class="error" id="err-q11"></div>
+                <div class="error" id="err-q-inactivity"></div>
             </div>
         </div>
 
         <!-- Q12 checkbox -->
-        <div class="row field" id="field-q12">
+        <div class="row field" id="field-q-represent">
             <div>
                 <label>Behaviour Disclaimer</label>
                 <span class="desc">As a member, you represent the unit. We expect you to act responsibly and not cause drama, chaos, or ragebait. If you harm the unit or undermine partner units, you will be removed. Are you able to represent the unit properly and handle unpleasant situations in partner units without escalating or adding fuel to the fire, especially in public settings?</span>
                 <div class="agree-line">
-                    <input id="q12" type="checkbox" class="agree-input"/>
-                    <label for="q12" class="agree-tag">I am able to shut up and inform my command instead of escalating.</label>
+                    <input id="q-represent" type="checkbox" class="agree-input"/>
+                    <label for="q-represent" class="agree-tag">I am able to shut up and inform my command instead of escalating.</label>
                 </div>
-                <div class="error" id="err-q12"></div>
+                <div class="error" id="err-q-represent"></div>
             </div>
         </div>
     </form>
@@ -353,10 +353,11 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
     const DISCORD_LIMIT = 2000;
     const hasDevQueryParam = new URLSearchParams(window.location.search).has("dev");
 
-    const textFieldIds = ["q3", "q4", "q5", "q6Note", "q7Note", "q8"];
-    const inlineClearFieldIds = ["q0", "q1", "q2", "q3", "q4", "q5", "q6Note", "q7Note", "q8"];
-    const checkboxIds = ["q4dual", "q9", "q11", "q12"];
-    const allIds = ["q0", "q1", "q2", "q3", "q4", "q4dual", "q5", "q6", "q7", "q8", "q9", "q10", "q11", "q12"];
+    const textFieldIds = ["q-history", "q-units", "q-games", "q-time-note", "q-mods-note", "q-afsc-note"];
+    const inlineClearFieldIds = ["q-name", "q-steamid", "q-hours", "q-history", "q-units", "q-games", "q-time-note", "q-mods-note", "q-afsc-note"];
+    const checkboxIds = ["q-dualclan", "q-downtime", "q-inactivity", "q-represent"];
+    const allIds = ["q-name", "q-steamid", "q-hours", "q-history", "q-units", "q-dualclan", "q-games", "q-time", "q-mods", "q-afsc-note", "q-downtime", "q-english", "q-inactivity", "q-represent"];
+
 
     const touched = new Set();
 
@@ -417,32 +418,32 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
             .map((node) => node.value);
     }
 
-    const Q6_DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-    const q6SelectedSlots = new Set();
-    const Q6_SLOT_COUNT = 48;
-    let q6IsDragging = false;
-    let q6DragSelectState = true;
-    let q7IsDragging = false;
-    let q7DragSelectState = true;
+    const DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    const timeSelectedSlots = new Set();
+    const TIME_SLOT_COUNT = 48;
+    let timeIsDragging = false;
+    let timeDragSelectState = true;
+    let modsIsDragging = false;
+    let modsDragSelectState = true;
 
-    function q6SlotKey(dayIndex, slotIndex) {
+    function timeSlotKey(dayIndex, slotIndex) {
         return `${dayIndex}-${slotIndex}`;
     }
 
-    function isQ6SlotSelected(dayIndex, slotIndex) {
-        return q6SelectedSlots.has(q6SlotKey(dayIndex, slotIndex));
+    function isTimeSlotSelected(dayIndex, slotIndex) {
+        return timeSelectedSlots.has(timeSlotKey(dayIndex, slotIndex));
     }
 
-    function getQ6SelectedCount() {
-        return q6SelectedSlots.size;
+    function getTimeSelectedCount() {
+        return timeSelectedSlots.size;
     }
 
-    function getQ6Ranges() {
+    function getTimeRanges() {
         const ranges = [];
         for (let day = 0; day < 7; day += 1) {
             const slots = [];
-            for (let slot = 0; slot < Q6_SLOT_COUNT; slot += 1) {
-                if (isQ6SlotSelected(day, slot)) slots.push(slot);
+            for (let slot = 0; slot < TIME_SLOT_COUNT; slot += 1) {
+                if (isTimeSlotSelected(day, slot)) slots.push(slot);
             }
             if (slots.length === 0) continue;
 
@@ -503,17 +504,17 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
         return `${zone} (UTC${sign}${hh}:${mm})`;
     }
 
-    function buildQ6AvailabilityLine() {
-        const ranges = getQ6Ranges();
+    function buildAvailabilityLines() {
+        const ranges = getTimeRanges();
         return ranges.map((r) => {
             const startTs = getNextWeekdayTimestamp(r.day, r.startSlot);
             const endTs = getNextWeekdayTimestamp(r.day, r.endSlotExclusive);
-            return `${Q6_DAY_NAMES[r.day]} ${formatDiscordTimeTag(startTs)} - ${formatDiscordTimeTag(endTs)}`;
+            return `${DAY_NAMES[r.day]} ${formatDiscordTimeTag(startTs)} - ${formatDiscordTimeTag(endTs)}`;
         });
     }
 
-    function renderQ6Grid() {
-        const table = el("q6Table");
+    function renderTimeGrid() {
+        const table = el("q-time-table");
         if (!table) return;
         table.innerHTML = "";
 
@@ -527,12 +528,12 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
         for (let day = 0; day < 7; day += 1) {
             const head = document.createElement("div");
             head.className = "availability-hour";
-            head.textContent = Q6_DAY_NAMES[day].slice(0, 3);
+            head.textContent = DAY_NAMES[day].slice(0, 3);
             header.appendChild(head);
         }
         table.appendChild(header);
 
-        for (let slot = 0; slot < Q6_SLOT_COUNT; slot += 1) {
+        for (let slot = 0; slot < TIME_SLOT_COUNT; slot += 1) {
             const row = document.createElement("div");
             row.className = "availability-row";
 
@@ -550,28 +551,28 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
                 const cell = document.createElement("button");
                 cell.type = "button";
                 cell.className = "availability-cell";
-                if (isQ6SlotSelected(dayIndex, slot)) cell.classList.add("active");
+                if (isTimeSlotSelected(dayIndex, slot)) cell.classList.add("active");
                 cell.dataset.day = String(dayIndex);
                 cell.dataset.slot = String(slot);
                 const h = Math.floor(slot / 2);
                 const m = slot % 2 === 0 ? "00" : "30";
-                cell.title = `${Q6_DAY_NAMES[dayIndex]} ${String(h).padStart(2, "0")}:${m}`;
+                cell.title = `${DAY_NAMES[dayIndex]} ${String(h).padStart(2, "0")}:${m}`;
                 cell.addEventListener("mousedown", (evt) => {
                     evt.preventDefault();
-                    const key = q6SlotKey(dayIndex, slot);
-                    q6DragSelectState = !q6SelectedSlots.has(key);
-                    if (q6DragSelectState) q6SelectedSlots.add(key);
-                    else q6SelectedSlots.delete(key);
-                    q6IsDragging = true;
-                    markTouched("q6");
+                    const key = timeSlotKey(dayIndex, slot);
+                    timeDragSelectState = !timeSelectedSlots.has(key);
+                    if (timeDragSelectState) timeSelectedSlots.add(key);
+                    else timeSelectedSlots.delete(key);
+                    timeIsDragging = true;
+                    markTouched("q-time");
                     renderOutput();
                 });
                 cell.addEventListener("mouseenter", () => {
-                    if (!q6IsDragging) return;
-                    const key = q6SlotKey(dayIndex, slot);
-                    if (q6DragSelectState) q6SelectedSlots.add(key);
-                    else q6SelectedSlots.delete(key);
-                    markTouched("q6");
+                    if (!timeIsDragging) return;
+                    const key = timeSlotKey(dayIndex, slot);
+                    if (timeDragSelectState) timeSelectedSlots.add(key);
+                    else timeSelectedSlots.delete(key);
+                    markTouched("q-time");
                     renderOutput();
                 });
                 row.appendChild(cell);
@@ -581,22 +582,22 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
         }
     }
 
-    function setQ7CheckboxState(node, state) {
+    function setModsCheckboxState(node, state) {
         if (!node || node.checked === state) return;
         node.checked = state;
         node.dispatchEvent(new Event("change", {bubbles: true}));
     }
 
-    function initQ7DragSelection() {
-        document.querySelectorAll("#q7ModsWrap .plain-option").forEach((option) => {
+    function initModsDragSelection() {
+        document.querySelectorAll("#q-mods-wrap .plain-option").forEach((option) => {
             const checkbox = option.querySelector('input[type="checkbox"]');
             if (!checkbox) return;
 
             option.addEventListener("mousedown", (evt) => {
                 evt.preventDefault();
-                q7DragSelectState = !checkbox.checked;
-                q7IsDragging = true;
-                setQ7CheckboxState(checkbox, q7DragSelectState);
+                modsDragSelectState = !checkbox.checked;
+                modsIsDragging = true;
+                setModsCheckboxState(checkbox, modsDragSelectState);
             });
 
             option.addEventListener("click", (evt) => {
@@ -605,30 +606,30 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
             });
 
             option.addEventListener("mouseenter", () => {
-                if (!q7IsDragging) return;
-                setQ7CheckboxState(checkbox, q7DragSelectState);
+                if (!modsIsDragging) return;
+                setModsCheckboxState(checkbox, modsDragSelectState);
             });
         });
     }
 
-    function validateQ6() {
-        if (getQ6SelectedCount() === 0) return "Select at least one availability slot.";
+    function validateTime() {
+        if (getTimeSelectedCount() === 0) return "Select at least one availability slot.";
         return "";
     }
 
-    function validateQ7() {
+    function validateMods() {
         return "";
     }
 
-    function validateQ8() {
-        const afsc = String(el("q8Afsc").value || "").trim();
-        const details = sanitizeValue(el("q8").value);
+    function validateAfsc() {
+        const afsc = String(el("q-afsc").value || "").trim();
+        const details = sanitizeValue(el("q-afsc-note").value);
         if (!afsc) return "Select an AFSC.";
         if (!details) return "This field is required.";
         return "";
     }
 
-    function validateQ10(value) {
+    function validateEnglish(value) {
         const n = Number(value);
         if (!Number.isFinite(n) || n < 1 || n > 10) return "Pick a value from 1 to 10.";
         return "";
@@ -641,13 +642,13 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
     function getFieldError(id) {
         const node = el(id);
 
-        if (id === "q0") return validateName(node.value);
-        if (id === "q1") return validateSteamID64(node.value);
-        if (id === "q2") return validateHours(node.value);
-        if (id === "q6") return validateQ6();
-        if (id === "q7") return validateQ7();
-        if (id === "q8") return validateQ8();
-        if (id === "q10") return validateQ10(node.value);
+        if (id === "q-name") return validateName(node.value);
+        if (id === "q-steamid") return validateSteamID64(node.value);
+        if (id === "q-hours") return validateHours(node.value);
+        if (id === "q-time") return validateTime();
+        if (id === "q-mods") return validateMods();
+        if (id === "q-afsc-note") return validateAfsc();
+        if (id === "q-english") return validateEnglish(node.value);
         if (checkboxIds.includes(id)) return validateCheckbox(node.checked);
         return validateRequiredText(node.value);
     }
@@ -677,37 +678,54 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
         // Only call this when valid.
         const lines = [];
 
-        lines.push(`\`${sanitizeValue(el("q0").value)}\` \`${sanitizeValue(el("q1").value)}\` \`${String(el("q2").value).trim()}\`hrs`);
+        const qName = sanitizeValue(el("q-name").value);
+        const qSteamid = sanitizeValue(el("q-steamid").value);
+        const qHours = String(el("q-hours").value).trim();
+        const qHistory = sanitizeValue(el("q-history").value);
+        const qUnits = sanitizeValue(el("q-units").value);
+        const qGames = sanitizeValue(el("q-games").value);
+        const timeRanges = buildAvailabilityLines();
+        const qTimeNote = sanitizeValue(el("q-time-note").value);
+        const qModsList = getCheckedValues("q-mods");
+        const qModsNote = sanitizeValue(el("q-mods-note").value);
+        const qModsText = qModsList.length ? qModsList.join(", ") : "None";
+        const qAfscNote = sanitizeValue(el("q-afsc-note").value);
+        const qEnglish = String(el("q-english").value).trim();
 
-        lines.push(`\`3\` ${sanitizeValue(el("q3").value)}`);
+        const qAfscCode = sanitizeValue(el("q-afsc").value);
+        const qAfscName = sanitizeValue(el("q-afsc-name").value);
+        const qAfscRole = qAfscName ? `${qAfscCode} ${qAfscName}` : qAfscCode;
 
-        lines.push(`\`4\` ${sanitizeValue(el("q4").value)}`);
+        const codeblock = (text:string) => (`\`\`\`` + text + `\`\`\``);
 
-        lines.push(`\`5\` ${sanitizeValue(el("q5").value)}`);
+        lines.push(`\`${qName}\` \`${qHours}hrs\` \`${qAfscRole}\``);
+        lines.push(`\`${qSteamid}\` \`${qEnglish}/10\``)
 
-        const q6Ranges = buildQ6AvailabilityLine();
-        const q6Note = sanitizeValue(el("q6Note").value);
-        const q6Timezone = getAutoTimezoneLabel();
-        const q6ReferenceTs = formatDiscordTimeTag(getTodayLocalTimestamp(21, 37));
-        lines.push(`\`6\` ${q6Ranges.join("; ")}; TZ: ${q6Timezone}; My \`21:37\` is your ${q6ReferenceTs}${q6Note ? `; ${q6Note}` : ""}`);
+        lines.push("### Availability");
+        timeRanges.forEach(range => lines.push(range));
 
-        const q7Mods = getCheckedValues("q7Mods");
-        const q7Note = sanitizeValue(el("q7Note").value);
-        const q7ModsText = q7Mods.length ? q7Mods.join(", ") : "None";
-        lines.push(`\`7\` ${q7ModsText}${q7Note ? `; ${q7Note}` : ""}`);
+        if (qTimeNote) lines.push(qTimeNote);
 
-        const q8Code = sanitizeValue(el("q8Afsc").value);
-        const q8Name = sanitizeValue(el("q8AfscName").value);
-        const q8Role = q8Name ? `\`${q8Code}\` ${q8Name}` : `\`${q8Code}\``;
-        lines.push(`\`8\` ${q8Role}: ${sanitizeValue(el("q8").value)}`);
+        lines.push("### Mod Familiarity");
+        lines.push(qModsText);
+        if (qModsNote) lines.push(qModsNote);
 
-        lines.push(`\`10\` ${String(el("q10").value).trim()}/10`);
+        lines.push("### Current Units");
+        lines.push(qUnits);
 
-        lines.push(`-# I understood and agreed to all other questions`);
+        lines.push("### Arma Experience");
+        lines.push(qHistory);
+
+        lines.push("### AFSC Expirience");
+        lines.push(qAfscNote);
+
+        lines.push("### Other Games");
+        lines.push(qGames);
+
+        lines.push("-# I understood and agreed to all other questions and disclaimers");
 
         return lines.join("\n");
     }
-
     // Split text by lines while keeping chunks under Discord limit.
     function splitForDiscordByQuestion(text, limit = DISCORD_LIMIT) {
         if (!text) return [];
@@ -807,8 +825,8 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
     }
 
     function renderOutput() {
-        renderQ6Grid();
-        renderQ10Scale();
+        renderTimeGrid();
+        renderEnglishScale();
         autoResizeAll();
         updateInlineClearButtons();
 
@@ -881,15 +899,15 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
         });
     }
 
-    function updateQ10Value() {
-        const out = el("q10Value");
-        if (out) out.textContent = String(el("q10").value || "1");
+    function updateEnglishValue() {
+        const out = el("q-english-value");
+        if (out) out.textContent = String(el("q-english").value || "1");
     }
 
-    function updateQ8AfscUI() {
-        const trigger = el("q8AfscTrigger");
-        const code = String(el("q8Afsc").value || "").trim();
-        const name = String(el("q8AfscName").value || "").trim();
+    function updateAfscUI() {
+        const trigger = el("q-afsc-trigger");
+        const code = String(el("q-afsc").value || "").trim();
+        const name = String(el("q-afsc-name").value || "").trim();
         trigger.textContent = code ? `${code} - ${name}` : "Select AFSC";
     }
 
@@ -899,7 +917,7 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
             if (!node) return;
             const placeholder = node.getAttribute("placeholder");
             if (typeof placeholder === "string" && placeholder.length > 0) {
-                if (id === "q8") {
+                if (id === "q-afsc-note") {
                     const parts = placeholder.split("\n");
                     node.value = parts.length > 1 ? parts.slice(1).join("\n").trim() : placeholder;
                 } else {
@@ -908,42 +926,42 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
             }
         };
 
-        ["q0", "q1", "q2", "q3", "q4", "q5", "q8"].forEach(setFromPlaceholder);
+        ["q-name", "q-steamid", "q-hours", "q-history", "q-units", "q-games", "q-afsc-note"].forEach(setFromPlaceholder);
 
-        el("q4dual").checked = true;
+        el("q-dualclan").checked = true;
 
-        q6SelectedSlots.clear();
-        for (let slot = 36; slot < 44; slot += 1) q6SelectedSlots.add(q6SlotKey(0, slot)); // Monday 18:00-22:00
-        for (let slot = 38; slot < 46; slot += 1) q6SelectedSlots.add(q6SlotKey(3, slot)); // Thursday 19:00-23:00
-        for (let slot = 34; slot < 42; slot += 1) q6SelectedSlots.add(q6SlotKey(5, slot)); // Saturday 17:00-21:00
-        el("q6Note").value = "Usually free in the evenings. Some weekdays may vary due to work, but weekends are mostly consistent.";
+        timeSelectedSlots.clear();
+        for (let slot = 36; slot < 44; slot += 1) timeSelectedSlots.add(timeSlotKey(0, slot)); // Monday 18:00-22:00
+        for (let slot = 38; slot < 46; slot += 1) timeSelectedSlots.add(timeSlotKey(3, slot)); // Thursday 19:00-23:00
+        for (let slot = 34; slot < 42; slot += 1) timeSelectedSlots.add(timeSlotKey(5, slot)); // Saturday 17:00-21:00
+        el("q-time-note").value = "Usually free in the evenings. Some weekdays may vary due to work, but weekends are mostly consistent.";
 
-        const q7Defaults = new Set(["ACE", "TFAR", "ACRE"]);
-        document.querySelectorAll('input[name="q7Mods"]').forEach((node) => {
-            node.checked = q7Defaults.has(node.value);
+        const modsDefaults = new Set(["ACE", "TFAR", "ACRE"]);
+        document.querySelectorAll('input[name="q-mods"]').forEach((node) => {
+            node.checked = modsDefaults.has(node.value);
         });
-        el("q7Note").value = "I haven't played with ACRE since long ago, but should be able to use it. Im very familiar with KAT, but ACM only on a basic level.";
+        el("q-mods-note").value = "I haven't played with ACRE since long ago, but should be able to use it. Im very familiar with KAT, but ACM only on a basic level.";
 
-        el("q8Afsc").value = "11HX";
-        el("q8AfscName").value = "Rescue Pilot";
-        el("q9").checked = true;
-        el("q10").value = "8";
-        el("q11").checked = true;
-        el("q12").checked = true;
+        el("q-afsc").value = "11HX";
+        el("q-afsc-name").value = "Rescue Pilot";
+        el("q-downtime").checked = true;
+        el("q-english").value = "8";
+        el("q-inactivity").checked = true;
+        el("q-represent").checked = true;
 
         allIds.forEach((id) => touched.add(id));
-        updateQ8AfscUI();
-        closeQ8AfscDropdown();
+        updateAfscUI();
+        closeAfscDropdown();
         renderOutput();
     }
 
-    function closeQ8AfscDropdown() {
-        el("q8AfscSelect").classList.remove("open");
+    function closeAfscDropdown() {
+        el("q-afsc-select").classList.remove("open");
     }
 
-    function initQ8AfscDropdown() {
-        const select = el("q8AfscSelect");
-        const trigger = el("q8AfscTrigger");
+    function initAfscDropdown() {
+        const select = el("q-afsc-select");
+        const trigger = el("q-afsc-trigger");
 
         trigger.addEventListener("click", () => {
             select.classList.toggle("open");
@@ -951,23 +969,23 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
 
         select.querySelectorAll(".discord-select-option").forEach((btn) => {
             btn.addEventListener("click", () => {
-                el("q8Afsc").value = btn.dataset.afsc || "";
-                el("q8AfscName").value = btn.dataset.afscName || "";
-                markTouched("q8");
-                closeQ8AfscDropdown();
-                updateQ8AfscUI();
+                el("q-afsc").value = btn.dataset.afsc || "";
+                el("q-afsc-name").value = btn.dataset.afscName || "";
+                markTouched("q-afsc-note");
+                closeAfscDropdown();
+                updateAfscUI();
                 renderOutput();
             });
         });
 
         document.addEventListener("click", (evt) => {
-            if (!select.contains(evt.target)) closeQ8AfscDropdown();
+            if (!select.contains(evt.target)) closeAfscDropdown();
         });
     }
 
-    function renderQ10Scale() {
-        updateQ10Value();
-        const selected = String(el("q10").value || "1");
+    function renderEnglishScale() {
+        updateEnglishValue();
+        const selected = String(el("q-english").value || "1");
         document.querySelectorAll(".q10-box").forEach((btn) => {
             btn.classList.toggle("active", btn.dataset.q10Score === selected);
         });
@@ -990,7 +1008,7 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
             });
         } else {
             node.addEventListener("input", () => {
-                if (node.id === "q0" && node.value.length > 32) {
+                if (node.id === "q-name" && node.value.length > 32) {
                     node.value = node.value.slice(0, 32);
                 }
                 renderOutput();
@@ -1027,9 +1045,9 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
             const node = el(id);
             if (!node) return;
             node.value = "";
-            if (id === "q8") {
-                el("q8Afsc").value = "";
-                el("q8AfscName").value = "";
+            if (id === "q-afsc-note") {
+                el("q-afsc").value = "";
+                el("q-afsc-name").value = "";
                 updateQ8AfscUI();
             }
             node.dispatchEvent(new Event("input", {bubbles: true}));
@@ -1039,8 +1057,8 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
 
     document.querySelectorAll(".q10-box").forEach((btn) => {
         btn.addEventListener("click", () => {
-            el("q10").value = btn.dataset.q10Score;
-            markTouched("q10");
+            el("q-english").value = btn.dataset.q10Score;
+            markTouched("q-english");
             renderOutput();
         });
     });
@@ -1049,17 +1067,17 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
     el("fillExampleBtn").addEventListener("click", fillExampleAnswers);
 
     document.addEventListener("mouseup", () => {
-        q6IsDragging = false;
-        q7IsDragging = false;
+        timeIsDragging = false;
+        modsIsDragging = false;
     });
 
     // Init field listeners
-    ["q0", "q1", "q2", "q3", "q4", "q4dual", "q5", "q9", "q11", "q12"].forEach(attachFieldTracking);
-    attachQuestionTracking("q6", ["#q6Note"]);
-    attachQuestionTracking("q7", ["#q7Note", 'input[name="q7Mods"]']);
-    attachQuestionTracking("q8", ["#q8"]);
-    initQ7DragSelection();
-    initQ8AfscDropdown();
+    ["q-name", "q-steamid", "q-hours", "q-history", "q-units", "q-dualclan", "q-games", "q-downtime", "q-inactivity", "q-represent"].forEach(attachFieldTracking);
+    attachQuestionTracking("q-time", ["#q-time-note"]);
+    attachQuestionTracking("q-mods", ["#q-mods-note", 'input[name="q-mods"]']);
+    attachQuestionTracking("q-afsc-note", ["#q-afsc-note"]);
+    initModsDragSelection();
+    initAfscDropdown();
 
     textFieldIds.forEach(id => {
         const ta = el(id);
@@ -1067,8 +1085,8 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
         ta.addEventListener("input", () => autoResizeTextarea(ta));
     });
 
-    updateQ10Value();
-    updateQ8AfscUI();
+    updateEnglishValue();
+    updateAfscUI();
 
     // Initial render (no output until valid)
     renderOutput();
