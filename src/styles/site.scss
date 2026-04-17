@@ -20,16 +20,16 @@
     --color-content-border: oklch(1 0 0 / 10%);
     --color-dark-footer: oklch(0.12 0 0);
 
-    --color-dark-raw-l: 0.145;
-    --color-dark-raw-c: 0;
-    --color-dark-raw-h: 0;
-    --color-dark-d3: oklch(calc(var(--color-dark-raw-l) - 30%) var(--color-dark-raw-c) var(--color-dark-raw-h));
-    --color-dark-d2: oklch(calc(var(--color-dark-raw-l) - 20%) var(--color-dark-raw-c) var(--color-dark-raw-h));
-    --color-dark-d1: oklch(calc(var(--color-dark-raw-l) - 10%) var(--color-dark-raw-c) var(--color-dark-raw-h));
-    --color-primary: oklch(var(--color-dark-raw-l) var(--color-dark-raw-c) var(--color-dark-raw-h));
-    --color-dark-l1: oklch(calc(var(--color-dark-raw-l) + 10%) var(--color-dark-raw-c) var(--color-dark-raw-h));
-    --color-dark-l2: oklch(calc(var(--color-dark-raw-l) + 20%) var(--color-dark-raw-c) var(--color-dark-raw-h));
-    --color-dark-l3: oklch(calc(var(--color-dark-raw-l) + 30%) var(--color-dark-raw-c) var(--color-dark-raw-h));
+    --color-dark--raw-l: 0.145;
+    --color-dark--raw-c: 0;
+    --color-dark--raw-h: 0;
+    --color-dark-d3: oklch(calc(var(--color-dark--raw-l) - 30%) var(--color-dark--raw-c) var(--color-dark--raw-h));
+    --color-dark-d2: oklch(calc(var(--color-dark--raw-l) - 20%) var(--color-dark--raw-c) var(--color-dark--raw-h));
+    --color-dark-d1: oklch(calc(var(--color-dark--raw-l) - 10%) var(--color-dark--raw-c) var(--color-dark--raw-h));
+    --color-dark: oklch(var(--color-dark--raw-l) var(--color-dark--raw-c) var(--color-dark--raw-h));
+    --color-dark-l1: oklch(calc(var(--color-dark--raw-l) + 10%) var(--color-dark--raw-c) var(--color-dark--raw-h));
+    --color-dark-l2: oklch(calc(var(--color-dark--raw-l) + 20%) var(--color-dark--raw-c) var(--color-dark--raw-h));
+    --color-dark-l3: oklch(calc(var(--color-dark--raw-l) + 30%) var(--color-dark--raw-c) var(--color-dark--raw-h));
 
     --color-white-85: oklch(1 0 0 / 85%);
     --color-white-72: oklch(1 0 0 / 72%);
@@ -46,6 +46,8 @@
     --color-button-dark: rgba(9, 9, 11, 0.28);
     --color-button-dark-hover: rgba(9, 9, 11, 0.36);
 
+    --space-0-5: 2px;
+    --space-1: 4px;
     --space-2: 8px;
     --space-2-5: 10px;
     --space-3: 12px;
@@ -69,9 +71,9 @@
     --text-4xl: 40px;
     --text-5xl: 54px;
 
-    --radius-md: 6px;
-    --radius-lg: 18px;
-    --radius-xl: 28px;
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
 
     --border-light: 1px solid var(--color-white-08);
     --shadow-button-hover: 0 10px 24px rgba(0, 0, 0, 0.22);
@@ -309,7 +311,7 @@ main {
     min-width: 140px;
     padding: var(--space-2-5) var(--space-5);
     border: 1px solid transparent;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-sm);
     font-family: var(--font-sans);
     font-size: var(--text-sm);
     font-weight: 500;
@@ -321,6 +323,13 @@ main {
     border-color var(--transition-fast),
     color var(--transition-fast),
     box-shadow var(--transition-fast);
+
+    &:hover {
+        background: var(--color-surface-dark);
+        border-color: var(--color-white);
+        color: var(--color-white);
+        box-shadow: var(--shadow-button-hover);
+    }
 }
 
 .btn-primary {
@@ -331,16 +340,11 @@ main {
 
 .btn-secondary {
     background: var(--color-surface-dark);
-    border-color: rgba(255, 255, 255, 0.24);
-    color: #fafafa;
+    border-color: oklch(1 0 0 / 24%);
+    color: oklch(0.85 0 0);
 }
 
-.btn:hover {
-    background: var(--color-surface-dark);
-    border-color: rgba(255, 255, 255, 0.85);
-    color: var(--color-white);
-    box-shadow: var(--shadow-button-hover);
-}
+
 
 
 .overview-section {
@@ -403,7 +407,7 @@ main {
     @include glass-backdrop;
     padding: var(--space-6);
     border: var(--border-light);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     background: var(--color-overlay-dark);
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14);
 }
