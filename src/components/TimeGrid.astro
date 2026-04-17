@@ -1,0 +1,370 @@
+---
+interface Props {
+    readonly?: boolean;
+    initialValue?: string;
+}
+const {readonly = false, initialValue = ""} = Astro.props;
+const DAY_LABELS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+---
+
+<div
+        class:list={["timegrid-root", readonly && "timegrid-root--readonly"]}
+        data-readonly={readonly ? "true" : "false"}
+        data-initial-value={initialValue}
+>
+    <div class="timegrid-header" aria-hidden="true">
+        <div class="timegrid-header-spacer"></div>
+        {DAY_LABELS.map((name) => <div class="timegrid-day-label">{name}</div>)}
+    </div>
+    <div class="timegrid-body">
+        <div class="timegrid-labels" aria-hidden="true">
+            {Array.from({length: 23}, (_, i) => {
+                const h = i + 1;
+                return (
+                        <span class="timegrid-label" style={`--h:${h}`}>{String(h).padStart(2, "0")}:00</span>
+                );
+            })}
+        </div>
+        {DAY_LABELS.map((name, d) => (
+                <div class="timegrid-day" data-day={d}>
+                    <div class="timegrid-day-cells">
+                        {Array.from({length: 48}, (_, s) => {
+                            const hh = String(Math.floor(s / 2)).padStart(2, "0");
+                            const mm = s % 2 ? "30" : "00";
+                            return (
+                                    <button
+                                            type="button"
+                                            class="timegrid-cell"
+                                            data-day={d}
+                                            data-slot={s}
+                                            aria-label={`${name} ${hh}:${mm}`}
+                                            tabindex={-1}
+                                    ></button>
+                            );
+                        })}
+                    </div>
+                </div>
+        ))}
+    </div>
+</div>
+
+<script>
+    import {encodeSelection, decodeEncoded} from "../utils/timeGridCodec";
+
+    type XY = { d: number; s: number };
+
+    function initInstance(root: HTMLElement) {
+        if ((root as any).__timeGridReady) return;
+        (root as any).__timeGridReady = true;
+
+        const state = new Set<string>();
+        let origin: XY | null = null;
+        let targetValue = false;
+        const changed = new Map<string, boolean>();
+        let controller: AbortController | null = null;
+
+        const cellOf = (d: number, s: number) =>
+            root.querySelector<HTMLButtonElement>(
+                `.timegrid-cell[data-day="${d}"][data-slot="${s}"]`,
+            );
+
+        function paint(key: string, on: boolean) {
+            const [d, s] = key.split("-");
+            const cell = cellOf(Number(d), Number(s));
+            if (cell) cell.classList.toggle("is-selected", on);
+        }
+
+        function repaintAll() {
+            root.querySelectorAll<HTMLButtonElement>(".timegrid-cell").forEach((c) => {
+                const k = `${c.dataset.day}-${c.dataset.slot}`;
+                c.classList.toggle("is-selected", state.has(k));
+            });
+        }
+
+        function loadFromEncoded(encoded: string) {
+            const next = decodeEncoded(encoded);
+            state.clear();
+            next.forEach((k) => state.add(k));
+            repaintAll();
+        }
+
+        function applyRect(curD: number, curS: number) {
+            if (!origin) return;
+            const minD = Math.min(origin.d, curD);
+            const maxD = Math.max(origin.d, curD);
+            const minS = Math.min(origin.s, curS);
+            const maxS = Math.max(origin.s, curS);
+
+            for (const [key, prev] of changed) {
+                if (prev) state.add(key);
+                else state.delete(key);
+                paint(key, prev);
+            }
+            changed.clear();
+
+            for (let d = minD; d <= maxD; d++) {
+                for (let s = minS; s <= maxS; s++) {
+                    const key = `${d}-${s}`;
+                    const prev = state.has(key);
+                    if (prev === targetValue) continue;
+                    changed.set(key, prev);
+                    if (targetValue) state.add(key);
+                    else state.delete(key);
+                    paint(key, targetValue);
+                }
+            }
+        }
+
+        function beginDrag(d: number, s: number) {
+            origin = {d, s};
+            targetValue = !state.has(`${d}-${s}`);
+            changed.clear();
+            applyRect(d, s);
+        }
+
+        function commitDrag() {
+            if (!origin) return;
+            const hadChanges = changed.size > 0;
+            origin = null;
+            changed.clear();
+            if (hadChanges) {
+                root.dispatchEvent(
+                    new CustomEvent("timegrid-change", {
+                        detail: {encoded: encodeSelection(state)},
+                        bubbles: true,
+                    }),
+                );
+            }
+        }
+
+        function cellFromPoint(x: number, y: number): HTMLElement | null {
+            const el = document.elementFromPoint(x, y);
+            if (!el) return null;
+            const c = (el as HTMLElement).closest(".timegrid-cell") as HTMLElement | null;
+            if (!c || !root.contains(c)) return null;
+            return c;
+        }
+
+        function attachInteractiveHandlers() {
+            controller?.abort();
+            controller = new AbortController();
+            const {signal} = controller;
+
+            root.addEventListener(
+                "mousedown",
+                (evt) => {
+                    const cell = (evt.target as HTMLElement | null)?.closest<HTMLElement>(".timegrid-cell");
+                    if (!cell || !root.contains(cell)) return;
+                    evt.preventDefault();
+                    beginDrag(Number(cell.dataset.day), Number(cell.dataset.slot));
+                },
+                {signal},
+            );
+
+            root.addEventListener(
+                "mouseover",
+                (evt) => {
+                    if (!origin) return;
+                    const cell = (evt.target as HTMLElement | null)?.closest<HTMLElement>(".timegrid-cell");
+                    if (!cell || !root.contains(cell)) return;
+                    applyRect(Number(cell.dataset.day), Number(cell.dataset.slot));
+                },
+                {signal},
+            );
+
+            document.addEventListener("mouseup", commitDrag, {signal});
+            window.addEventListener("blur", commitDrag, {signal});
+
+            root.addEventListener(
+                "touchstart",
+                (evt) => {
+                    const t = evt.touches[0];
+                    if (!t) return;
+                    const cell = cellFromPoint(t.clientX, t.clientY);
+                    if (!cell) return;
+                    evt.preventDefault();
+                    beginDrag(Number(cell.dataset.day), Number(cell.dataset.slot));
+                },
+                {signal, passive: false},
+            );
+
+            root.addEventListener(
+                "touchmove",
+                (evt) => {
+                    if (!origin) return;
+                    const t = evt.touches[0];
+                    if (!t) return;
+                    const cell = cellFromPoint(t.clientX, t.clientY);
+                    if (!cell) return;
+                    evt.preventDefault();
+                    applyRect(Number(cell.dataset.day), Number(cell.dataset.slot));
+                },
+                {signal, passive: false},
+            );
+
+            root.addEventListener("touchend", commitDrag, {signal});
+            root.addEventListener("touchcancel", commitDrag, {signal});
+        }
+
+        if (root.dataset.readonly === "true") {
+            const iv = root.dataset.initialValue || "";
+            if (iv) {
+                try {
+                    loadFromEncoded(iv);
+                } catch {
+                    /* ignore — page-level script is responsible for surfacing the error */
+                }
+            }
+        } else {
+            attachInteractiveHandlers();
+        }
+
+        (root as any).getEncodedValue = () => encodeSelection(state);
+        (root as any).getLocalSelection = () => new Set(state);
+        (root as any).setMode = (mode: "interactive" | "readonly", encoded?: string) => {
+            if (mode === "readonly") {
+                controller?.abort();
+                controller = null;
+                root.classList.add("timegrid-root--readonly");
+                root.dataset.readonly = "true";
+                origin = null;
+                changed.clear();
+                if (encoded !== undefined) loadFromEncoded(encoded);
+            } else {
+                root.classList.remove("timegrid-root--readonly");
+                root.dataset.readonly = "false";
+                if (encoded !== undefined) loadFromEncoded(encoded);
+                attachInteractiveHandlers();
+            }
+        };
+    }
+
+    document.querySelectorAll<HTMLElement>(".timegrid-root").forEach(initInstance);
+</script>
+
+<style>
+    .timegrid-root {
+        --tg-cell-available: var(--success);
+        --tg-cell-height: 21px;
+        --tg-label-width: 48px;
+        --tg-day-gap: 6px;
+        --tg-divider-strong: var(--border-strong, #2f3136);
+        --tg-divider-subtle: var(--border-subtle, #31343b);
+        --tg-card-border: var(--border-strong, #2f3136);
+        --tg-card-bg: var(--surface-elev-1, #1b1d22);
+        --tg-hover-ring: rgba(255, 255, 255, 0.85);
+        --tg-muted: var(--muted, #b5bac1);
+
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        width: 100%;
+        color: var(--tg-muted);
+        font-size: 11px;
+        user-select: none;
+        touch-action: none;
+    }
+
+    .timegrid-header {
+        display: grid;
+        grid-template-columns: var(--tg-label-width) repeat(7, minmax(0, 1fr));
+        gap: var(--tg-day-gap);
+    }
+
+    .timegrid-header-spacer {
+        /* intentionally empty */
+    }
+
+    .timegrid-day-label {
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: var(--text-emphasis, #f2f3f5);
+    }
+
+    .timegrid-body {
+        display: grid;
+        grid-template-columns: var(--tg-label-width) repeat(7, minmax(0, 1fr));
+        gap: var(--tg-day-gap);
+        align-items: stretch;
+    }
+
+    .timegrid-labels {
+        position: relative;
+    }
+
+    .timegrid-label {
+        --h: 0;
+        position: absolute;
+        right: 6px;
+        top: calc(var(--h) / 24 * 100%);
+        transform: translateY(-50%);
+        font-size: 13px;
+        line-height: 1;
+        color: var(--tg-muted);
+        pointer-events: none;
+        white-space: nowrap;
+    }
+
+    .timegrid-day {
+        border: 1px solid var(--tg-card-border);
+        border-radius: 8px;
+        background: var(--tg-card-bg);
+        overflow: hidden;
+    }
+
+    .timegrid-day-cells {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .timegrid-cell {
+        display: block;
+        width: 100%;
+        height: var(--tg-cell-height);
+        min-height: 18px;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        cursor: pointer;
+        position: relative;
+        transition: background-color 80ms ease, box-shadow 80ms ease;
+        appearance: none;
+        -webkit-appearance: none;
+    }
+
+    .timegrid-cell:focus {
+        outline: none;
+    }
+
+    .timegrid-cell:nth-child(2n) {
+        border-top: 1px dashed var(--tg-divider-subtle);
+    }
+
+    .timegrid-cell:nth-child(2n+1):not(:first-child) {
+        border-top: 1px solid var(--tg-divider-strong);
+    }
+
+    .timegrid-cell.is-selected {
+        background: var(--tg-cell-available);
+    }
+
+    .timegrid-cell:hover {
+        box-shadow: inset 0 0 0 1px var(--tg-hover-ring);
+        z-index: 1;
+        filter: none;
+    }
+
+    .timegrid-root--readonly .timegrid-cell {
+        cursor: default;
+    }
+
+    .timegrid-root--readonly .timegrid-cell:hover {
+        box-shadow: none;
+    }
+</style>

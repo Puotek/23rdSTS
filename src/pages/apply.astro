@@ -1,6 +1,7 @@
 ---
 import "../styles/apply.scss";
 import RawLayout from "../layouts/RawLayout.astro";
+import TimeGrid from "../components/TimeGrid.astro";
 ---
 
 <RawLayout title="23rd STS Application">
@@ -148,9 +149,7 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
                     <label>Weekly availability</label>
                     <span class="desc">Select a generic times during the week that you are available to play ops rather regularly. Click or click-and-drag to mark available time.
                     <br/>Time is in your local time zone in 30 min blocks.</span>
-                    <div class="availability-grid" id="q-time-grid">
-                        <div class="availability-table" id="q-time-table"></div>
-                    </div>
+                    <TimeGrid/>
                     <div class="input-clear-wrap" data-inline-wrap="q-time-note">
                         <textarea id="q-time-note" placeholder="Optional notes: exceptions, weeks you are busy, disclaimers about irregular work schedule, etc."></textarea>
                         <button type="button" class="inline-clear-btn" data-inline-clear="q-time-note">
@@ -339,6 +338,8 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
         </div>
     </div>
     <script>
+        import {encodeSelection} from "../utils/timeGridCodec";
+
         const DISCORD_LIMIT = 2000;
         const hasDevQueryParam = new URLSearchParams(window.location.search).has("dev");
 
@@ -408,23 +409,14 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
         }
 
         const DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-        const timeSelectedSlots = new Set();
         const TIME_SLOT_COUNT = 48;
-        let timeIsDragging = false;
-        let timeDragSelectState = true;
+        let tgLocalSelection = new Set();
+        let tgEncoded = "";
         let modsIsDragging = false;
         let modsDragSelectState = true;
 
-        function timeSlotKey(dayIndex, slotIndex) {
-            return `${dayIndex}-${slotIndex}`;
-        }
-
-        function isTimeSlotSelected(dayIndex, slotIndex) {
-            return timeSelectedSlots.has(timeSlotKey(dayIndex, slotIndex));
-        }
-
         function getTimeSelectedCount() {
-            return timeSelectedSlots.size;
+            return tgLocalSelection.size;
         }
 
         function getTimeRanges() {
@@ -432,7 +424,7 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
             for (let day = 0; day < 7; day += 1) {
                 const slots = [];
                 for (let slot = 0; slot < TIME_SLOT_COUNT; slot += 1) {
-                    if (isTimeSlotSelected(day, slot)) slots.push(slot);
+                    if (tgLocalSelection.has(`${day}-${slot}`)) slots.push(slot);
                 }
                 if (slots.length === 0) continue;
 
@@ -479,97 +471,17 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
             return Math.floor(local.getTime() / 1000);
         }
 
-        function getAutoTimezoneLabel() {
-            let zone = "Local";
-            try {
-                zone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Local";
-            } catch (_) {
-            }
-
-            const offsetMinutes = -new Date().getTimezoneOffset();
-            const sign = offsetMinutes >= 0 ? "+" : "-";
-            const abs = Math.abs(offsetMinutes);
-            const hh = String(Math.floor(abs / 60)).padStart(2, "0");
-            const mm = String(abs % 60).padStart(2, "0");
-            return `${zone} (UTC${sign}${hh}:${mm})`;
-        }
-
         function buildAvailabilityLines() {
             const ranges = getTimeRanges();
-            return ranges.map((r) => {
+            const lines = ranges.map((r) => {
                 const startTs = getNextWeekdayTimestamp(r.day, r.startSlot);
                 const endTs = getNextWeekdayTimestamp(r.day, r.endSlotExclusive);
                 return `${DAY_NAMES[r.day]} ${formatDiscordTimeTag(startTs)} - ${formatDiscordTimeTag(endTs)}`;
             });
-        }
-
-        function renderTimeGrid() {
-            const table = el("q-time-table");
-            if (!table) return;
-            table.innerHTML = "";
-
-            const header = document.createElement("div");
-            header.className = "availability-header";
-            const emptyHead = document.createElement("div");
-            emptyHead.className = "availability-label";
-            emptyHead.textContent = "Time";
-            header.appendChild(emptyHead);
-
-            for (let day = 0; day < 7; day += 1) {
-                const head = document.createElement("div");
-                head.className = "availability-hour";
-                head.textContent = DAY_NAMES[day].slice(0, 3);
-                header.appendChild(head);
+            if (tgEncoded) {
+                lines.push(`-# [TimeGrid](https://puotek.github.io/23rdSTS/timegrid?view=${tgEncoded})`);
             }
-            table.appendChild(header);
-
-            for (let slot = 0; slot < TIME_SLOT_COUNT; slot += 1) {
-                const row = document.createElement("div");
-                row.className = "availability-row";
-
-                const label = document.createElement("div");
-                label.className = "availability-label";
-                if (slot % 2 === 0) {
-                    const h = Math.floor(slot / 2);
-                    label.textContent = `${String(h).padStart(2, "0")}:00`;
-                } else {
-                    label.textContent = "";
-                }
-                row.appendChild(label);
-
-                for (let dayIndex = 0; dayIndex < 7; dayIndex += 1) {
-                    const cell = document.createElement("button");
-                    cell.type = "button";
-                    cell.className = "availability-cell";
-                    if (isTimeSlotSelected(dayIndex, slot)) cell.classList.add("active");
-                    cell.dataset.day = String(dayIndex);
-                    cell.dataset.slot = String(slot);
-                    const h = Math.floor(slot / 2);
-                    const m = slot % 2 === 0 ? "00" : "30";
-                    cell.title = `${DAY_NAMES[dayIndex]} ${String(h).padStart(2, "0")}:${m}`;
-                    cell.addEventListener("mousedown", (evt) => {
-                        evt.preventDefault();
-                        const key = timeSlotKey(dayIndex, slot);
-                        timeDragSelectState = !timeSelectedSlots.has(key);
-                        if (timeDragSelectState) timeSelectedSlots.add(key);
-                        else timeSelectedSlots.delete(key);
-                        timeIsDragging = true;
-                        markTouched("q-time");
-                        renderOutput();
-                    });
-                    cell.addEventListener("mouseenter", () => {
-                        if (!timeIsDragging) return;
-                        const key = timeSlotKey(dayIndex, slot);
-                        if (timeDragSelectState) timeSelectedSlots.add(key);
-                        else timeSelectedSlots.delete(key);
-                        markTouched("q-time");
-                        renderOutput();
-                    });
-                    row.appendChild(cell);
-                }
-
-                table.appendChild(row);
-            }
+            return lines;
         }
 
         function setModsCheckboxState(node, state) {
@@ -816,7 +728,6 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
         }
 
         function renderOutput() {
-            renderTimeGrid();
             renderEnglishScale();
             autoResizeAll();
             updateInlineClearButtons();
@@ -921,10 +832,17 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
 
             el("q-dualclan").checked = true;
 
-            timeSelectedSlots.clear();
-            for (let slot = 36; slot < 44; slot += 1) timeSelectedSlots.add(timeSlotKey(0, slot)); // Monday 18:00-22:00
-            for (let slot = 38; slot < 46; slot += 1) timeSelectedSlots.add(timeSlotKey(3, slot)); // Thursday 19:00-23:00
-            for (let slot = 34; slot < 42; slot += 1) timeSelectedSlots.add(timeSlotKey(5, slot)); // Saturday 17:00-21:00
+            const exampleSelection = new Set();
+            for (let slot = 36; slot < 44; slot += 1) exampleSelection.add(`0-${slot}`); // Monday 18:00-22:00
+            for (let slot = 38; slot < 46; slot += 1) exampleSelection.add(`3-${slot}`); // Thursday 19:00-23:00
+            for (let slot = 34; slot < 42; slot += 1) exampleSelection.add(`5-${slot}`); // Saturday 17:00-21:00
+            const exampleEncoded = encodeSelection(exampleSelection);
+            const tgRoot = document.querySelector(".timegrid-root") as any;
+            if (tgRoot && typeof tgRoot.setMode === "function") {
+                tgRoot.setMode("interactive", exampleEncoded);
+                tgLocalSelection = typeof tgRoot.getLocalSelection === "function" ? tgRoot.getLocalSelection() : exampleSelection;
+                tgEncoded = typeof tgRoot.getEncodedValue === "function" ? tgRoot.getEncodedValue() : exampleEncoded;
+            }
             el("q-time-note").value = "Usually free in the evenings. Some weekdays may vary due to work, but weekends are mostly consistent.";
 
             const modsDefaults = new Set(["ACE", "TFAR", "ACRE"]);
@@ -1058,9 +976,20 @@ I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762
         el("fillExampleBtn").addEventListener("click", fillExampleAnswers);
 
         document.addEventListener("mouseup", () => {
-            timeIsDragging = false;
             modsIsDragging = false;
         });
+
+        const timeGridRoot = document.querySelector(".timegrid-root");
+        if (timeGridRoot) {
+            timeGridRoot.addEventListener("timegrid-change", (evt) => {
+                const detail = (evt as CustomEvent<{encoded: string}>).detail;
+                tgEncoded = detail?.encoded ?? "";
+                const getLocal = (timeGridRoot as any).getLocalSelection;
+                tgLocalSelection = typeof getLocal === "function" ? getLocal() : new Set();
+                markTouched("q-time");
+                renderOutput();
+            });
+        }
 
         // Init field listeners
         ["q-name", "q-steamid", "q-hours", "q-history", "q-units", "q-dualclan", "q-games", "q-downtime", "q-inactivity", "q-represent"].forEach(attachFieldTracking);

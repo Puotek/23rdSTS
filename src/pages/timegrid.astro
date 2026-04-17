@@ -1,0 +1,165 @@
+---
+import "../styles/site.scss";
+import RawLayout from "../layouts/RawLayout.astro";
+import Footer from "../components/Footer.astro";
+import TimeGrid from "../components/TimeGrid.astro";
+---
+
+<RawLayout title="TimeGrid — 23rd STS">
+    <main class="tg-page">
+        <section class="tg-card">
+            <TimeGrid/>
+            <div class="tg-actions">
+                <button id="tg-action-btn" class="btn btn-primary" type="button">Copy link</button>
+            </div>
+            <div id="tg-error" class="tg-error" hidden>
+                This TimeGrid link is invalid or corrupted.
+            </div>
+        </section>
+    </main>
+    <Footer/>
+</RawLayout>
+
+<style is:global>
+    html, body {
+        margin: 0;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        color: var(--color-white);
+        background: var(--color-content-background);
+    }
+
+    main.tg-page {
+        flex: 1 1 auto;
+        display: grid;
+        place-items: center;
+        padding: var(--space-4);
+    }
+
+    .tg-card {
+        width: min(960px, 100%);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+        padding: var(--space-4);
+        border: 1px solid var(--border-inset, #222429);
+        border-radius: var(--radius-lg);
+        background: var(--color-overlay-dark);
+        backdrop-filter: blur(14px) saturate(140%);
+        box-shadow: var(--shadow-panel);
+    }
+
+    .tg-card .timegrid-root {
+        --tg-cell-height: clamp(22px, calc((100vh - 220px) / 48), 32px);
+        min-height: 0;
+    }
+
+    .tg-actions {
+        display: flex;
+        justify-content: center;
+    }
+
+    .tg-actions .btn {
+        min-width: 160px;
+    }
+
+    .tg-error {
+        padding: var(--space-4);
+        color: var(--error, #f23f43);
+        font-size: var(--text-sm);
+        text-align: center;
+    }
+</style>
+
+<script>
+    import {decodeEncoded} from "../utils/timeGridCodec";
+
+    type TimeGridRoot = HTMLElement & {
+        setMode?: (mode: "interactive" | "readonly", encoded?: string) => void;
+        getEncodedValue?: () => string;
+    };
+
+    function run() {
+        const root = document.querySelector<TimeGridRoot>(".timegrid-root");
+        const actionBtn = document.getElementById("tg-action-btn") as HTMLButtonElement | null;
+        const errorEl = document.getElementById("tg-error");
+        if (!root || !actionBtn || !errorEl) return;
+
+        const params = new URLSearchParams(window.location.search);
+        const view = params.get("view");
+
+        async function handleCopy() {
+            if (!root || !actionBtn) return;
+            const encoded = root.getEncodedValue?.() ?? "";
+            const url = new URL(window.location.href);
+            url.searchParams.set("view", encoded);
+            const link = url.toString();
+            let copied = false;
+            try {
+                await navigator.clipboard.writeText(link);
+                copied = true;
+            } catch {
+                const ta = document.createElement("textarea");
+                ta.value = link;
+                ta.style.position = "fixed";
+                ta.style.left = "-9999px";
+                document.body.appendChild(ta);
+                ta.select();
+                try {
+                    copied = document.execCommand("copy");
+                } catch {
+                    copied = false;
+                }
+                document.body.removeChild(ta);
+            }
+            const prev = actionBtn.textContent;
+            actionBtn.textContent = copied ? "Copied!" : "Copy failed";
+            setTimeout(() => {
+                if (actionBtn.textContent === "Copied!" || actionBtn.textContent === "Copy failed") {
+                    actionBtn.textContent = prev;
+                }
+            }, 1500);
+        }
+
+        function setInteractive() {
+            if (!root || !actionBtn) return;
+            root.setMode?.("interactive");
+            const url = new URL(window.location.href);
+            url.searchParams.delete("view");
+            window.history.replaceState(null, "", url.toString());
+            actionBtn.textContent = "Copy link";
+            actionBtn.onclick = handleCopy;
+        }
+
+        function setReadonly(encoded: string) {
+            if (!root || !actionBtn) return;
+            root.setMode?.("readonly", encoded);
+            actionBtn.textContent = "Edit";
+            actionBtn.onclick = setInteractive;
+        }
+
+        if (view) {
+            try {
+                decodeEncoded(view);
+            } catch {
+                root.hidden = true;
+                actionBtn.hidden = true;
+                errorEl.hidden = false;
+                return;
+            }
+            setReadonly(view);
+        } else {
+            actionBtn.onclick = handleCopy;
+        }
+    }
+
+    if (document.readyState === "complete") {
+        run();
+    } else {
+        window.addEventListener("load", run);
+    }
+</script>

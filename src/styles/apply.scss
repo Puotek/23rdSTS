@@ -20,9 +20,6 @@
     --border-check: #7f8590;
     --accent: #5865f2;
     --error: #f23f43;
-    --success: #58cf7b;
-    --success-soft: rgba(88, 207, 123, 0.2);
-    --success-text: #d2ffe0;
     --accent-soft-1: rgba(106, 166, 255, 0.16);
     --accent-soft-2: rgba(88, 101, 242, 0.52);
     --accent-mention-bg: rgba(88, 101, 242, 0.34);
@@ -195,7 +192,7 @@ label {
 .field > div > textarea,
 .field > div > .plain-options,
 .field > div > .agree-line,
-.field > div > .availability-grid,
+.field > div > .timegrid-root,
 .field > div > .input-clear-wrap,
 .field > div > .discord-select,
 .field > div > select {
@@ -246,10 +243,13 @@ select:focus {
 
 .field.invalid input,
 .field.invalid textarea,
-.field.invalid .plain-options,
-.field.invalid .availability-grid {
+.field.invalid .plain-options {
     border-color: var(--error) !important;
     outline-color: var(--error-outline);
+}
+
+.field.invalid .timegrid-day {
+    border-color: var(--error) !important;
 }
 
 select {
@@ -538,61 +538,6 @@ select:focus {
     border-color: var(--success);
     background: var(--success-soft);
     color: var(--success-text);
-}
-
-/* ===== Availability Grid ===== */
-.availability-grid {
-    overflow: visible;
-    max-height: none;
-    padding: var(--space-2);
-    border: var(--border-width) solid var(--border-strong);
-    border-radius: var(--radius-md);
-    background: var(--panel-2);
-}
-
-.availability-table {
-    min-width: 0;
-}
-
-.availability-header,
-.availability-row {
-    display: grid;
-    grid-template-columns: 56px repeat(7, minmax(62px, 1fr));
-    align-items: center;
-    gap: var(--space-1);
-    margin-bottom: var(--space-1);
-}
-
-.availability-row:last-child {
-    margin-bottom: 0;
-}
-
-.availability-label,
-.availability-hour {
-    color: var(--muted);
-    font-size: 0.72rem;
-    text-align: center;
-    user-select: none;
-}
-
-.availability-label {
-    padding-left: var(--space-0-5);
-    text-align: left;
-}
-
-.availability-cell {
-    height: var(--size-cell);
-    padding: 0;
-    border: var(--border-width) solid var(--border-subtle);
-    border-radius: var(--space-1);
-    background: var(--surface-elev-1);
-    cursor: pointer;
-    transition: background-color var(--transition-cell), border-color var(--transition-cell);
-}
-
-.availability-cell.active {
-    border-color: var(--accent);
-    background: var(--accent-soft-2);
 }
 
 /* ===== Actions / Output Panels ===== */
