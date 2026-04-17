@@ -1,142 +1,131 @@
 ---
 import "../styles/apply.scss";
-
-const base = import.meta.env.BASE_URL;
-const withBase = (path = "") => `${base.replace(/\/?$/, "/")}${path.replace(/^\//, "")}`;
+import RawLayout from "../layouts/RawLayout.astro";
 ---
 
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="generator" content={Astro.generator}/>
-    <link rel="icon" href={withBase("favicon.ico")}/>
-    <title>23rd STS Application</title>
-</head>
-<body>
-<div class="wrap">
-    <h1>23rd Special Tactics Squadron - Recruitment Application</h1>
-    <p class="note">
-        Please fill all questions thoroughly then copy the generated output and send it in your recruitment ticket. Your generated answers may be split into multiple messages due to Discord message limit (2000 characters).
-        <br/> The questions have greyed out placeholder text inside, you can use it as example answers.
-        <br/> If you encountered any errors or would like to give feedback please contact
-        <a class="discord-mention" href="https://discord.com/users/291967371646599169" target="_blank" rel="noopener noreferrer">@Puotek</a>
-        on Discord or create an issue on
-        <a href="https://github.com/Puotek/23rdSTS/issues" target="_blank" rel="noopener noreferrer">GitHub Issues</a>.
-    </p>
+<RawLayout title="23rd STS Application">
+    <div class="wrap">
+        <h1>23rd Special Tactics Squadron - Recruitment Application</h1>
+        <p class="note">
+            Please fill all questions thoroughly then copy the generated output and send it in your recruitment ticket. Your generated answers may be split into multiple messages due to Discord message limit (2000 characters).
+            <br/> The questions have greyed out placeholder text inside, you can use it as example answers.
+            <br/> If you encountered any errors or would like to give feedback please contact
+            <a class="discord-mention" href="https://discord.com/users/291967371646599169" target="_blank" rel="noopener noreferrer">@Puotek</a>
+            on Discord or create an issue on
+            <a href="https://github.com/Puotek/23rdSTS/issues" target="_blank" rel="noopener noreferrer">GitHub Issues</a>.
+        </p>
 
-    <form id="appForm" class="card" onsubmit="return false;" novalidate>
-        <!-- Q0 Name -->
-        <div class="row field" id="field-q-name">
-            <div>
-                <label for="q-name">What name would you like to use?</label>
-                <div class="input-clear-wrap" data-inline-wrap="q-name">
-                    <input id="q-name" type="text" maxlength="32" placeholder="J. Smith"/>
-                    <button type="button" class="inline-clear-btn" data-inline-clear="q-name">
-                        &times;
-                    </button>
+        <form id="appForm" class="card" onsubmit="return false;" novalidate>
+            <!-- Q0 Name -->
+            <div class="row field" id="field-q-name">
+                <div>
+                    <label for="q-name">What name would you like to use?</label>
+                    <div class="input-clear-wrap" data-inline-wrap="q-name">
+                        <input id="q-name" type="text" maxlength="32" placeholder="J. Smith"/>
+                        <button type="button" class="inline-clear-btn" data-inline-clear="q-name">
+                            &times;
+                        </button>
+                    </div>
+                    <span class="desc">Please choose a nickname in the <code>A. Name</code> format (max 32 characters) (you can update your discord nickname as well)</span>
+                    <div class="error" id="err-q-name"></div>
                 </div>
-                <span class="desc">Please choose a nickname in the <code>A. Name</code> format (max 32 characters) (you can update your discord nickname as well)</span>
-                <div class="error" id="err-q-name"></div>
             </div>
-        </div>
 
-        <!-- Q1 -->
-        <div class="row field" id="field-q-steamid">
-            <div>
-                <label for="q-steamid">What is your SteamID64?</label>
-                <div class="input-clear-wrap" data-inline-wrap="q-steamid">
-                    <input id="q-steamid" type="text" inputmode="numeric" maxlength="17" placeholder="76561198000000000"/>
-                    <button type="button" class="inline-clear-btn" data-inline-clear="q-steamid">
-                        &times;
-                    </button>
-                </div>
-                <span class="desc">
+            <!-- Q1 -->
+            <div class="row field" id="field-q-steamid">
+                <div>
+                    <label for="q-steamid">What is your SteamID64?</label>
+                    <div class="input-clear-wrap" data-inline-wrap="q-steamid">
+                        <input id="q-steamid" type="text" inputmode="numeric" maxlength="17" placeholder="76561198000000000"/>
+                        <button type="button" class="inline-clear-btn" data-inline-clear="q-steamid">
+                            &times;
+                        </button>
+                    </div>
+                    <span class="desc">
             Find it here:
             <a href="https://store.steampowered.com/account/" target="_blank" rel="noopener noreferrer">store.steampowered.com/account/</a>
             • Alternative:
             <a href="https://steamid.io/" target="_blank" rel="noopener noreferrer">steamid.io</a>
           </span>
-                <div class="error" id="err-q-steamid"></div>
-            </div>
-        </div>
-
-        <!-- Q2 -->
-        <div class="row field" id="field-q-hours">
-            <div>
-                <label for="q-hours">How many hours do you have in Arma 3?</label>
-                <div class="input-clear-wrap" data-inline-wrap="q-hours">
-                    <input id="q-hours" type="number" min="0" step="1" placeholder="2137"/>
-                    <button type="button" class="inline-clear-btn" data-inline-clear="q-hours">
-                        &times;
-                    </button>
+                    <div class="error" id="err-q-steamid"></div>
                 </div>
-                <span class="desc">Whole number</span>
-                <div class="error" id="err-q-hours"></div>
             </div>
-        </div>
 
-        <!-- Q3 -->
-        <div class="row field" id="field-q-history">
-            <div>
-                <label for="q-history">Please fully describe your Arma 3 experience</label>
-                <div class="input-clear-wrap" data-inline-wrap="q-history">
+            <!-- Q2 -->
+            <div class="row field" id="field-q-hours">
+                <div>
+                    <label for="q-hours">How many hours do you have in Arma 3?</label>
+                    <div class="input-clear-wrap" data-inline-wrap="q-hours">
+                        <input id="q-hours" type="number" min="0" step="1" placeholder="2137"/>
+                        <button type="button" class="inline-clear-btn" data-inline-clear="q-hours">
+                            &times;
+                        </button>
+                    </div>
+                    <span class="desc">Whole number</span>
+                    <div class="error" id="err-q-hours"></div>
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="row field" id="field-q-history">
+                <div>
+                    <label for="q-history">Please fully describe your Arma 3 experience</label>
+                    <div class="input-clear-wrap" data-inline-wrap="q-history">
                     <textarea id="q-history"
-                    placeholder="Playing basically since release. At first I played on public I&A servers, mostly as a pilot or squad lead. Later on I played with a group of friends on self-hosted zeus sessions. Than I joined a unit called BRO that hosted a public I&A server. It fell apart due to the owner misusing donations. After that I had a long break from Arma. After coming back I started looking a lot for a long-term unit to play with. I went through quite a lot of different units without staying too long. Currently I found a few units I somewhat actively play with, I will list the below. I also played a lot of Mike Force. Throughout I got a lot of expirience with a ton of different mods and did quite a lot of all the main stuff. I also played a few times in PvP events such as Friday Fight Night.
+                              placeholder="Playing basically since release. At first I played on public I&A servers, mostly as a pilot or squad lead. Later on I played with a group of friends on self-hosted zeus sessions. Than I joined a unit called BRO that hosted a public I&A server. It fell apart due to the owner misusing donations. After that I had a long break from Arma. After coming back I started looking a lot for a long-term unit to play with. I went through quite a lot of different units without staying too long. Currently I found a few units I somewhat actively play with, I will list the below. I also played a lot of Mike Force. Throughout I got a lot of expirience with a ton of different mods and did quite a lot of all the main stuff. I also played a few times in PvP events such as Friday Fight Night.
 Some units I was in:
 - Unit ABC: pretty serious; they played as a MEU and I filled a corpsman role (KAT); left since I was unhappy with the chaos there was and staff
 - Another Unit: hardcore milsim; I was in a trainer and command role; the main mission maker lost motivation and the unit slowly fell apart"></textarea>
-                    <button type="button" class="inline-clear-btn" data-inline-clear="q-history">
-                        &times;
-                    </button>
+                        <button type="button" class="inline-clear-btn" data-inline-clear="q-history">
+                            &times;
+                        </button>
+                    </div>
+                    <span class="desc">Include unit history (short unit description + role + duration + serious/casual) and overall experience (KOH / I&amp;A / Mike Force / Public Zeus, how much, and what roles).</span>
+                    <div class="error" id="err-q-history"></div>
                 </div>
-                <span class="desc">Include unit history (short unit description + role + duration + serious/casual) and overall experience (KOH / I&amp;A / Mike Force / Public Zeus, how much, and what roles).</span>
-                <div class="error" id="err-q-history"></div>
             </div>
-        </div>
 
-        <!-- Q4 -->
-        <div class="row field" id="field-q-units">
-            <div>
-                <label for="q-units">Are you currently in any Arma 3 units?</label>
-                <div class="input-clear-wrap" data-inline-wrap="q-units">
+            <!-- Q4 -->
+            <div class="row field" id="field-q-units">
+                <div>
+                    <label for="q-units">Are you currently in any Arma 3 units?</label>
+                    <div class="input-clear-wrap" data-inline-wrap="q-units">
                     <textarea id="q-units"
                               placeholder="Currently in:
 - Arma Addicts: rather casual unit with a very good mission maker; Im in a Staff role there and usually also play as the platoon leader or squad leader on the ground; They play every Sat at ~2000 CET, i try to join regularly;
 - Sigma Security Group: a serious and big group; they play as a PMC; Im in a avg operator role there, but sometimes play as team lead as well, mostly as a medic tho, they use KAT; They dont have a set schedule and op times vary and are dependent on multiple mission makers there, whether they have something and when they want to host;
 - MTF Epsilon-6: a rather small and messy SCP unit; I usually play there as a medic (KAT); I haven't played with them for a while now"></textarea>
-                    <button type="button" class="inline-clear-btn" data-inline-clear="q-units">
-                        &times;
-                    </button>
-                </div>
-                <span class="desc">If no: <code>I'm not actively in any Arma 3 unit.</code>
+                        <button type="button" class="inline-clear-btn" data-inline-clear="q-units">
+                            &times;
+                        </button>
+                    </div>
+                    <span class="desc">If no: <code>I'm not actively in any Arma 3 unit.</code>
                     <br/>If yes, for each unit:
                     <br/>- list the schedule when they play
                     <br/>- how active you are there
                     <br/>- what position do you fill
                     <br/>- do they prohibit dual-clanning
                 </span>
-                <div class="error" id="err-q-units"></div>
-            </div>
-        </div>
-
-        <div class="row field" id="field-q-dualclan">
-            <div>
-                <span class="desc">None of the units I'm actively in is against dual-clanning.</span>
-                <div class="agree-line">
-                    <input id="q-dualclan" type="checkbox" class="agree-input"/>
-                    <label for="q-dualclan" class="agree-tag">I confirm</label>
+                    <div class="error" id="err-q-units"></div>
                 </div>
-                <div class="error" id="err-q-dualclan"></div>
             </div>
-        </div>
 
-        <!-- Q5 -->
-        <div class="row field" id="field-q-games">
-            <div>
-                <label for="q-games">Briefly describe your experience with other milsim games besides Arma 3</label>
-                <div class="input-clear-wrap" data-inline-wrap="q-games">
+            <div class="row field" id="field-q-dualclan">
+                <div>
+                    <span class="desc">None of the units I'm actively in is against dual-clanning.</span>
+                    <div class="agree-line">
+                        <input id="q-dualclan" type="checkbox" class="agree-input"/>
+                        <label for="q-dualclan" class="agree-tag">I confirm</label>
+                    </div>
+                    <div class="error" id="err-q-dualclan"></div>
+                </div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="row field" id="field-q-games">
+                <div>
+                    <label for="q-games">Briefly describe your experience with other milsim games besides Arma 3</label>
+                    <div class="input-clear-wrap" data-inline-wrap="q-games">
                     <textarea id="q-games" placeholder="Yeah:
 - Arma 2: 100h; I dont remember it much
 - Reforger: 65h; I played mostly on public servers on launch, but Im not a fan
@@ -144,952 +133,953 @@ Some units I was in:
 - Post Scriptum/Squad 44: 171h; Similar to normal squad, but was not in any clan; played a lot on public servers as squad lead or vehicle crew
 - Ready or Not: 185h; Played since early access; Pretty experienced with the game and did quite some serious runs
 I also played Door Kickers 2 (126h), Rainbow Six Siege (487h), War Thunder (1762h), CoD Warzone (320h) and some other less known shooters shortly"></textarea>
-                    <button type="button" class="inline-clear-btn" data-inline-clear="q-games">
-                        &times;
-                    </button>
+                        <button type="button" class="inline-clear-btn" data-inline-clear="q-games">
+                            &times;
+                        </button>
+                    </div>
+                    <span class="desc">Reforger / Squad / RoN (hours, roles, etc.).</span>
+                    <div class="error" id="err-q-games"></div>
                 </div>
-                <span class="desc">Reforger / Squad / RoN (hours, roles, etc.).</span>
-                <div class="error" id="err-q-games"></div>
             </div>
-        </div>
 
-        <!-- Q6 -->
-        <div class="row field" id="field-q-time">
-            <div>
-                <label>Weekly availability</label>
-                <span class="desc">Select a generic times during the week that you are available to play ops rather regularly. Click or click-and-drag to mark available time.
+            <!-- Q6 -->
+            <div class="row field" id="field-q-time">
+                <div>
+                    <label>Weekly availability</label>
+                    <span class="desc">Select a generic times during the week that you are available to play ops rather regularly. Click or click-and-drag to mark available time.
                     <br/>Time is in your local time zone in 30 min blocks.</span>
-                <div class="availability-grid" id="q-time-grid">
-                    <div class="availability-table" id="q-time-table"></div>
+                    <div class="availability-grid" id="q-time-grid">
+                        <div class="availability-table" id="q-time-table"></div>
+                    </div>
+                    <div class="input-clear-wrap" data-inline-wrap="q-time-note">
+                        <textarea id="q-time-note" placeholder="Optional notes: exceptions, weeks you are busy, disclaimers about irregular work schedule, etc."></textarea>
+                        <button type="button" class="inline-clear-btn" data-inline-clear="q-time-note">
+                            &times;
+                        </button>
+                    </div>
+                    <div class="error" id="err-q-time"></div>
                 </div>
-                <div class="input-clear-wrap" data-inline-wrap="q-time-note">
-                    <textarea id="q-time-note" placeholder="Optional notes: exceptions, weeks you are busy, disclaimers about irregular work schedule, etc."></textarea>
-                    <button type="button" class="inline-clear-btn" data-inline-clear="q-time-note">
-                        &times;
-                    </button>
-                </div>
-                <div class="error" id="err-q-time"></div>
             </div>
-        </div>
 
-        <!-- Q7 -->
-        <div class="row field" id="field-q-mods">
-            <div>
-                <label>What gameplay-affecting mods have you played with?</label>
-                <span class="desc">Select all mods you are familiar with. You can describe the extent of you knowledge in the note or mention additional mods.</span>
-                <div class="plain-options" id="q-mods-wrap">
-                    <div class="plain-option"><input id="q-mod-ace" name="q-mods" type="checkbox" value="ACE"/><label
-                            for="q-mod-ace">ACE</label></div>
-                    <div class="plain-option"><input id="q-mod-tfar" name="q-mods" type="checkbox" value="TFAR"/><label
-                            for="q-mod-tfar">TFAR</label></div>
-                    <div class="plain-option"><input id="q-mod-acre" name="q-mods" type="checkbox" value="ACRE"/><label
-                            for="q-mod-acre">ACRE</label></div>
-                    <div class="plain-option"><input id="q-mod-acm" name="q-mods" type="checkbox" value="ACM"/><label
-                            for="q-mod-acm">ACM</label></div>
-                    <div class="plain-option"><input id="q-mod-kat" name="q-mods" type="checkbox" value="KAT"/><label
-                            for="q-mod-kat">KAT</label></div>
-                    <div class="plain-option"><input id="q-mod-ade" name="q-mods" type="checkbox" value="ADE"/><label
-                            for="q-mod-ade">ADE</label></div>
-                    <div class="plain-option"><input id="q-mod-iedd" name="q-mods" type="checkbox" value="IEDD"/><label
-                            for="q-mod-iedd">IEDD</label></div>
-                    <div class="plain-option"><input id="q-mod-itn" name="q-mods" type="checkbox" value="ITN"/><label
-                            for="q-mod-itn">ITN</label></div>
-                    <div class="plain-option"><input id="q-mod-ctab" name="q-mods" type="checkbox" value="CTAB"/><label
-                            for="q-mod-ctab">CTAB</label></div>
-                    <div class="plain-option"><input id="q-mod-hatchet" name="q-mods" type="checkbox"
-                                                     value="HATCHET"/><label for="q-mod-hatchet">HATCHET</label></div>
-                </div>
-                <div class="input-clear-wrap" data-inline-wrap="q-mods-note">
+            <!-- Q7 -->
+            <div class="row field" id="field-q-mods">
+                <div>
+                    <label>What gameplay-affecting mods have you played with?</label>
+                    <span class="desc">Select all mods you are familiar with. You can describe the extent of you knowledge in the note or mention additional mods.</span>
+                    <div class="plain-options" id="q-mods-wrap">
+                        <div class="plain-option"><input id="q-mod-ace" name="q-mods" type="checkbox" value="ACE"/><label
+                                for="q-mod-ace">ACE</label></div>
+                        <div class="plain-option"><input id="q-mod-tfar" name="q-mods" type="checkbox" value="TFAR"/><label
+                                for="q-mod-tfar">TFAR</label></div>
+                        <div class="plain-option"><input id="q-mod-acre" name="q-mods" type="checkbox" value="ACRE"/><label
+                                for="q-mod-acre">ACRE</label></div>
+                        <div class="plain-option"><input id="q-mod-acm" name="q-mods" type="checkbox" value="ACM"/><label
+                                for="q-mod-acm">ACM</label></div>
+                        <div class="plain-option"><input id="q-mod-kat" name="q-mods" type="checkbox" value="KAT"/><label
+                                for="q-mod-kat">KAT</label></div>
+                        <div class="plain-option"><input id="q-mod-ade" name="q-mods" type="checkbox" value="ADE"/><label
+                                for="q-mod-ade">ADE</label></div>
+                        <div class="plain-option"><input id="q-mod-iedd" name="q-mods" type="checkbox" value="IEDD"/><label
+                                for="q-mod-iedd">IEDD</label></div>
+                        <div class="plain-option"><input id="q-mod-itn" name="q-mods" type="checkbox" value="ITN"/><label
+                                for="q-mod-itn">ITN</label></div>
+                        <div class="plain-option"><input id="q-mod-ctab" name="q-mods" type="checkbox" value="CTAB"/><label
+                                for="q-mod-ctab">CTAB</label></div>
+                        <div class="plain-option"><input id="q-mod-hatchet" name="q-mods" type="checkbox"
+                                                         value="HATCHET"/><label for="q-mod-hatchet">HATCHET</label></div>
+                    </div>
+                    <div class="input-clear-wrap" data-inline-wrap="q-mods-note">
                     <textarea id="q-mods-note"
 
                               placeholder="Optional note: how expirienced you are with KAT/ACM for example or extra mods you would like to mention that introduce gameplay mechanics and are not listed."></textarea>
-                    <button type="button" class="inline-clear-btn" data-inline-clear="q-mods-note">
-                        &times;
-                    </button>
-                </div>
-                <div class="error" id="err-q-mods"></div>
-            </div>
-        </div>
-
-        <!-- Q8 -->
-        <div class="row field" id="field-q-afsc-note">
-            <div>
-                <label for="q-afsc-note">What is your experience with the AFSC you are applying for?</label>
-                <span class="desc">Select same AFSC as you sent in <code>#requests</code> and describe your relevant experience in Arma related to it and your confidence in it.</span>
-                <input id="q-afsc" type="hidden" value=""/>
-                <input id="q-afsc-name" type="hidden" value=""/>
-                <div class="discord-select" id="q-afsc-select">
-                    <button type="button" class="discord-select-trigger" id="q-afsc-trigger">Select AFSC</button>
-                    <div class="discord-select-menu">
-                        <button type="button" class="discord-select-option" data-afsc="11HX"
-                                data-afsc-name="Rescue Pilot">11HX - Rescue Pilot
-                        </button>
-                        <button type="button" class="discord-select-option" data-afsc="1Z1X1"
-                                data-afsc-name="Pararescue">1Z1X1 - Pararescue
-                        </button>
-                        <button type="button" class="discord-select-option" data-afsc="1Z2X1"
-                                data-afsc-name="Combat Control">1Z2X1 - Combat Control
-                        </button>
-                        <button type="button" class="discord-select-option" data-afsc="1Z3X1"
-                                data-afsc-name="Tactical Air Control Party">1Z3X1 - Tactical Air Control Party
-                        </button>
-                        <button type="button" class="discord-select-option" data-afsc="1Z4X1"
-                                data-afsc-name="Special Reconnaissance">1Z4X1 - Special Reconnaissance
-                        </button>
-                        <button type="button" class="discord-select-option" data-afsc="44MXG"
-                                data-afsc-name="Pulmonologist">44MXG - Pulmonologist
-                        </button>
-                        <button type="button" class="discord-select-option" data-afsc="44MXB"
-                                data-afsc-name="Cardiologist">44MXB - Cardiologist
-                        </button>
-                        <button type="button" class="discord-select-option" data-afsc="3E8X1"
-                                data-afsc-name="Explosive Ordnance Disposal">3E8X1 - Explosive Ordnance Disposal
-                        </button>
-                        <button type="button" class="discord-select-option" data-afsc="3E9X1"
-                                data-afsc-name="Emergency Management (CBRN)">3E9X1 - Emergency Management (CBRN)
-                        </button>
-                        <button type="button" class="discord-select-option" data-afsc="52RX" data-afsc-name="Chaplain">
-                            52RX - Chaplain
+                        <button type="button" class="inline-clear-btn" data-inline-clear="q-mods-note">
+                            &times;
                         </button>
                     </div>
+                    <div class="error" id="err-q-mods"></div>
                 </div>
-                <div class="input-clear-wrap" data-inline-wrap="q-afsc-note">
-                    <textarea id="q-afsc-note" placeholder="An example note to Rescue Pilot AFSC would be:&#10;I have a lot of flight hours in public servers and I did also do quite a bit of flying in a few units + I practiced a lot my self. I also did most of the Vanilla Time Trials for flying on at least silver. Im confident in my flying skills and am able to fly smooth. I havent really had expirience with 9-lines and that stuff tho. I fly SFM from fully first-person usually. I dont have a stick, I just fly keyboard."></textarea>
-                    <button type="button" class="inline-clear-btn" data-inline-clear="q-afsc-note">
-                        &times;
-                    </button>
-                </div>
-                <div class="error" id="err-q-afsc-note"></div>
             </div>
-        </div>
 
-        <!-- Q10 -->
-        <div class="row field" id="field-q-english">
-            <div>
-                <label for="q-english">How would you describe your English proficiency?</label>
-                <div class="scale-wrap">
-                    <div class="scale-top">
-                        <span>"I no english"</span>
-                        <span class="scale-value"><span id="q-english-value">5</span>/10</span>
-                        <span>Fluent and good speaker</span>
+            <!-- Q8 -->
+            <div class="row field" id="field-q-afsc-note">
+                <div>
+                    <label for="q-afsc-note">What is your experience with the AFSC you are applying for?</label>
+                    <span class="desc">Select same AFSC as you sent in <code>#requests</code> and describe your relevant experience in Arma related to it and your confidence in it.</span>
+                    <input id="q-afsc" type="hidden" value=""/>
+                    <input id="q-afsc-name" type="hidden" value=""/>
+                    <div class="discord-select" id="q-afsc-select">
+                        <button type="button" class="discord-select-trigger" id="q-afsc-trigger">Select AFSC</button>
+                        <div class="discord-select-menu">
+                            <button type="button" class="discord-select-option" data-afsc="11HX"
+                                    data-afsc-name="Rescue Pilot">11HX - Rescue Pilot
+                            </button>
+                            <button type="button" class="discord-select-option" data-afsc="1Z1X1"
+                                    data-afsc-name="Pararescue">1Z1X1 - Pararescue
+                            </button>
+                            <button type="button" class="discord-select-option" data-afsc="1Z2X1"
+                                    data-afsc-name="Combat Control">1Z2X1 - Combat Control
+                            </button>
+                            <button type="button" class="discord-select-option" data-afsc="1Z3X1"
+                                    data-afsc-name="Tactical Air Control Party">1Z3X1 - Tactical Air Control Party
+                            </button>
+                            <button type="button" class="discord-select-option" data-afsc="1Z4X1"
+                                    data-afsc-name="Special Reconnaissance">1Z4X1 - Special Reconnaissance
+                            </button>
+                            <button type="button" class="discord-select-option" data-afsc="44MXG"
+                                    data-afsc-name="Pulmonologist">44MXG - Pulmonologist
+                            </button>
+                            <button type="button" class="discord-select-option" data-afsc="44MXB"
+                                    data-afsc-name="Cardiologist">44MXB - Cardiologist
+                            </button>
+                            <button type="button" class="discord-select-option" data-afsc="3E8X1"
+                                    data-afsc-name="Explosive Ordnance Disposal">3E8X1 - Explosive Ordnance Disposal
+                            </button>
+                            <button type="button" class="discord-select-option" data-afsc="3E9X1"
+                                    data-afsc-name="Emergency Management (CBRN)">3E9X1 - Emergency Management (CBRN)
+                            </button>
+                            <button type="button" class="discord-select-option" data-afsc="52RX" data-afsc-name="Chaplain">
+                                52RX - Chaplain
+                            </button>
+                        </div>
                     </div>
-                    <input id="q-english" type="hidden" value="5"/>
-                    <div class="q10-boxes" id="q-english-boxes">
-                        <button type="button" class="q10-box" data-q10-score="1">1</button>
-                        <button type="button" class="q10-box" data-q10-score="2">2</button>
-                        <button type="button" class="q10-box" data-q10-score="3">3</button>
-                        <button type="button" class="q10-box" data-q10-score="4">4</button>
-                        <button type="button" class="q10-box" data-q10-score="5">5</button>
-                        <button type="button" class="q10-box" data-q10-score="6">6</button>
-                        <button type="button" class="q10-box" data-q10-score="7">7</button>
-                        <button type="button" class="q10-box" data-q10-score="8">8</button>
-                        <button type="button" class="q10-box" data-q10-score="9">9</button>
-                        <button type="button" class="q10-box" data-q10-score="10">10</button>
+                    <div class="input-clear-wrap" data-inline-wrap="q-afsc-note">
+                        <textarea id="q-afsc-note" placeholder="An example note to Rescue Pilot AFSC would be:&#10;I have a lot of flight hours in public servers and I did also do quite a bit of flying in a few units + I practiced a lot my self. I also did most of the Vanilla Time Trials for flying on at least silver. Im confident in my flying skills and am able to fly smooth. I havent really had expirience with 9-lines and that stuff tho. I fly SFM from fully first-person usually. I dont have a stick, I just fly keyboard."></textarea>
+                        <button type="button" class="inline-clear-btn" data-inline-clear="q-afsc-note">
+                            &times;
+                        </button>
                     </div>
+                    <div class="error" id="err-q-afsc-note"></div>
                 </div>
-                <span class="desc">Rate yourself taking into account speaking clarity, how well others understand you, and your comfort with spoken/written comms and briefings.</span>
-                <div class="error" id="err-q-english"></div>
             </div>
-        </div>
 
-        <!-- Q9 checkbox -->
-        <div class="row field" id="field-q-downtime">
-            <div>
-                <label>Downtime Disclaimer</label>
-                <span class="desc">Do you understand how much downtime and how little gameplay you may experience in your AFSC? Are you able to patiently wait for short but intense moments? Are you aware you may go through entire ops as PJ and not be called once?</span>
-                <div class="agree-line">
-                    <input id="q-downtime" type="checkbox" class="agree-input"/>
-                    <label for="q-downtime" class="agree-tag">I understand and won't excessively whine about ops being boring</label>
+            <!-- Q10 -->
+            <div class="row field" id="field-q-english">
+                <div>
+                    <label for="q-english">How would you describe your English proficiency?</label>
+                    <div class="scale-wrap">
+                        <div class="scale-top">
+                            <span>"I no english"</span>
+                            <span class="scale-value"><span id="q-english-value">5</span>/10</span>
+                            <span>Fluent and good speaker</span>
+                        </div>
+                        <input id="q-english" type="hidden" value="5"/>
+                        <div class="q10-boxes" id="q-english-boxes">
+                            <button type="button" class="q10-box" data-q10-score="1">1</button>
+                            <button type="button" class="q10-box" data-q10-score="2">2</button>
+                            <button type="button" class="q10-box" data-q10-score="3">3</button>
+                            <button type="button" class="q10-box" data-q10-score="4">4</button>
+                            <button type="button" class="q10-box" data-q10-score="5">5</button>
+                            <button type="button" class="q10-box" data-q10-score="6">6</button>
+                            <button type="button" class="q10-box" data-q10-score="7">7</button>
+                            <button type="button" class="q10-box" data-q10-score="8">8</button>
+                            <button type="button" class="q10-box" data-q10-score="9">9</button>
+                            <button type="button" class="q10-box" data-q10-score="10">10</button>
+                        </div>
+                    </div>
+                    <span class="desc">Rate yourself taking into account speaking clarity, how well others understand you, and your comfort with spoken/written comms and briefings.</span>
+                    <div class="error" id="err-q-english"></div>
                 </div>
-                <div class="error" id="err-q-downtime"></div>
             </div>
-        </div>
 
-        <!-- Q11 checkbox -->
-        <div class="row field" id="field-q-inactivity">
-            <div>
-                <label>Inactivity Disclaimer</label>
-                <span class="desc">We will not babysit you. We expect you to take initiative to schedule training and complete your pipeline. Long inactivity without communication or lack of initiative may result in removal. Do you understand?</span>
-                <div class="agree-line">
-                    <input id="q-inactivity" type="checkbox" class="agree-input"/>
-                    <label for="q-inactivity" class="agree-tag">I understand and will take initiative to complete the pipeline and inform command if I need to take a LOA</label>
+            <!-- Q9 checkbox -->
+            <div class="row field" id="field-q-downtime">
+                <div>
+                    <label>Downtime Disclaimer</label>
+                    <span class="desc">Do you understand how much downtime and how little gameplay you may experience in your AFSC? Are you able to patiently wait for short but intense moments? Are you aware you may go through entire ops as PJ and not be called once?</span>
+                    <div class="agree-line">
+                        <input id="q-downtime" type="checkbox" class="agree-input"/>
+                        <label for="q-downtime" class="agree-tag">I understand and won't excessively whine about ops being boring</label>
+                    </div>
+                    <div class="error" id="err-q-downtime"></div>
                 </div>
-                <div class="error" id="err-q-inactivity"></div>
             </div>
-        </div>
 
-        <!-- Q12 checkbox -->
-        <div class="row field" id="field-q-represent">
-            <div>
-                <label>Behaviour Disclaimer</label>
-                <span class="desc">As a member, you represent the unit. We expect you to act responsibly and not cause drama, chaos, or ragebait. If you harm the unit or undermine partner units, you will be removed. Are you able to represent the unit properly and handle unpleasant situations in partner units without escalating or adding fuel to the fire, especially in public settings?</span>
-                <div class="agree-line">
-                    <input id="q-represent" type="checkbox" class="agree-input"/>
-                    <label for="q-represent" class="agree-tag">I am able to shut up and inform my command instead of escalating.</label>
+            <!-- Q11 checkbox -->
+            <div class="row field" id="field-q-inactivity">
+                <div>
+                    <label>Inactivity Disclaimer</label>
+                    <span class="desc">We will not babysit you. We expect you to take initiative to schedule training and complete your pipeline. Long inactivity without communication or lack of initiative may result in removal. Do you understand?</span>
+                    <div class="agree-line">
+                        <input id="q-inactivity" type="checkbox" class="agree-input"/>
+                        <label for="q-inactivity" class="agree-tag">I understand and will take initiative to complete the pipeline and inform command if I need to take a LOA</label>
+                    </div>
+                    <div class="error" id="err-q-inactivity"></div>
                 </div>
-                <div class="error" id="err-q-represent"></div>
             </div>
-        </div>
-    </form>
 
-    <div class="card">
-        <p class="out-note">Copy each message and send it in your recruitment ticket. Please avoid modifying the generated output. If you have additional comments send them as additional messages in your ticket.</p>
-        <div class="actions">
-            <button type="button" class="secondary hidden" id="fillExampleBtn">Fill Example Answers</button>
-        </div>
-        <div class="out-header">
-            <strong>Generated Output</strong>
-            <span class="badge" id="statsBadge">Waiting for all required answers</span>
-        </div>
+            <!-- Q12 checkbox -->
+            <div class="row field" id="field-q-represent">
+                <div>
+                    <label>Behaviour Disclaimer</label>
+                    <span class="desc">As a member, you represent the unit. We expect you to act responsibly and not cause drama, chaos, or ragebait. If you harm the unit or undermine partner units, you will be removed. Are you able to represent the unit properly and handle unpleasant situations in partner units without escalating or adding fuel to the fire, especially in public settings?</span>
+                    <div class="agree-line">
+                        <input id="q-represent" type="checkbox" class="agree-input"/>
+                        <label for="q-represent" class="agree-tag">I am able to shut up and inform my command instead of escalating.</label>
+                    </div>
+                    <div class="error" id="err-q-represent"></div>
+                </div>
+            </div>
+        </form>
 
-        <div id="chunksContainer"></div>
+        <div class="card">
+            <p class="out-note">Copy each message and send it in your recruitment ticket. Please avoid modifying the generated output. If you have additional comments send them as additional messages in your ticket.</p>
+            <div class="actions">
+                <button type="button" class="secondary hidden" id="fillExampleBtn">Fill Example Answers</button>
+            </div>
+            <div class="out-header">
+                <strong>Generated Output</strong>
+                <span class="badge" id="statsBadge">Waiting for all required answers</span>
+            </div>
 
-        <div class="bottom-error" id="formBottomError">
-            You must answer all required questions to finish.
+            <div id="chunksContainer"></div>
+
+            <div class="bottom-error" id="formBottomError">
+                You must answer all required questions to finish.
+            </div>
         </div>
     </div>
-</div>
-<script>
-    const DISCORD_LIMIT = 2000;
-    const hasDevQueryParam = new URLSearchParams(window.location.search).has("dev");
+    <script>
+        const DISCORD_LIMIT = 2000;
+        const hasDevQueryParam = new URLSearchParams(window.location.search).has("dev");
 
-    const textFieldIds = ["q-history", "q-units", "q-games", "q-time-note", "q-mods-note", "q-afsc-note"];
-    const inlineClearFieldIds = ["q-name", "q-steamid", "q-hours", "q-history", "q-units", "q-games", "q-time-note", "q-mods-note", "q-afsc-note"];
-    const checkboxIds = ["q-dualclan", "q-downtime", "q-inactivity", "q-represent"];
-    const allIds = ["q-name", "q-steamid", "q-hours", "q-history", "q-units", "q-dualclan", "q-games", "q-time", "q-mods", "q-afsc-note", "q-downtime", "q-english", "q-inactivity", "q-represent"];
+        const textFieldIds = ["q-history", "q-units", "q-games", "q-time-note", "q-mods-note", "q-afsc-note"];
+        const inlineClearFieldIds = ["q-name", "q-steamid", "q-hours", "q-history", "q-units", "q-games", "q-time-note", "q-mods-note", "q-afsc-note"];
+        const checkboxIds = ["q-dualclan", "q-downtime", "q-inactivity", "q-represent"];
+        const allIds = ["q-name", "q-steamid", "q-hours", "q-history", "q-units", "q-dualclan", "q-games", "q-time", "q-mods", "q-afsc-note", "q-downtime", "q-english", "q-inactivity", "q-represent"];
 
 
-    const touched = new Set();
+        const touched = new Set();
 
-    const el = (id) => document.getElementById(id);
+        const el = (id) => document.getElementById(id);
 
-    function sanitizeValue(value) {
-        return (value || "")
-            .replace(/\r\n/g, "\n")
-            .replace(/\t/g, " ")
-            .split("\n")
-            .map(line => line.trim().replace(/\s{2,}/g, " "))
-            .join("\n")
-            .replace(/\n{3,}/g, "\n\n")
-            .trim();
-    }
+        function sanitizeValue(value) {
+            return (value || "")
+                .replace(/\r\n/g, "\n")
+                .replace(/\t/g, " ")
+                .split("\n")
+                .map(line => line.trim().replace(/\s{2,}/g, " "))
+                .join("\n")
+                .replace(/\n{3,}/g, "\n\n")
+                .trim();
+        }
 
-    function autoResizeTextarea(ta) {
-        ta.style.height = "auto";
-        ta.style.height = Math.max(44, ta.scrollHeight) + "px";
-    }
+        function autoResizeTextarea(ta) {
+            ta.style.height = "auto";
+            ta.style.height = Math.max(44, ta.scrollHeight) + "px";
+        }
 
-    function autoResizeAll() {
-        textFieldIds.forEach(id => autoResizeTextarea(el(id)));
-    }
+        function autoResizeAll() {
+            textFieldIds.forEach(id => autoResizeTextarea(el(id)));
+        }
 
-    function validateName(value) {
-        const v = sanitizeValue(value);
-        if (!v) return "This field is required.";
-        if (v.length > 32) return "Must be 32 characters or fewer.";
-        const re = /^[A-Z]\.\s[A-Z].*$/;
-        if (!re.test(v)) return "Use format: A. Name (uppercase initial and uppercase first letter after the dot).";
-        return "";
-    }
+        function validateName(value) {
+            const v = sanitizeValue(value);
+            if (!v) return "This field is required.";
+            if (v.length > 32) return "Must be 32 characters or fewer.";
+            const re = /^[A-Z]\.\s[A-Z].*$/;
+            if (!re.test(v)) return "Use format: A. Name (uppercase initial and uppercase first letter after the dot).";
+            return "";
+        }
 
-    function validateSteamID64(value) {
-        const v = sanitizeValue(value);
-        if (!v) return "This field is required.";
-        if (!/^\d+$/.test(v)) return "SteamID64 must contain only numbers.";
-        if (v.length !== 17) return "SteamID64 must be exactly 17 digits.";
-        return "";
-    }
+        function validateSteamID64(value) {
+            const v = sanitizeValue(value);
+            if (!v) return "This field is required.";
+            if (!/^\d+$/.test(v)) return "SteamID64 must contain only numbers.";
+            if (v.length !== 17) return "SteamID64 must be exactly 17 digits.";
+            return "";
+        }
 
-    function validateHours(value) {
-        const v = String(value ?? "").trim();
-        if (!v) return "This field is required.";
-        if (!/^\d+$/.test(v)) return "Please enter a whole number.";
-        return "";
-    }
+        function validateHours(value) {
+            const v = String(value ?? "").trim();
+            if (!v) return "This field is required.";
+            if (!/^\d+$/.test(v)) return "Please enter a whole number.";
+            return "";
+        }
 
-    function validateRequiredText(value) {
-        const v = sanitizeValue(value);
-        if (!v) return "This field is required.";
-        return "";
-    }
+        function validateRequiredText(value) {
+            const v = sanitizeValue(value);
+            if (!v) return "This field is required.";
+            return "";
+        }
 
-    function getCheckedValues(name) {
-        return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`))
-            .map((node) => node.value);
-    }
+        function getCheckedValues(name) {
+            return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`))
+                .map((node) => node.value);
+        }
 
-    const DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-    const timeSelectedSlots = new Set();
-    const TIME_SLOT_COUNT = 48;
-    let timeIsDragging = false;
-    let timeDragSelectState = true;
-    let modsIsDragging = false;
-    let modsDragSelectState = true;
+        const DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        const timeSelectedSlots = new Set();
+        const TIME_SLOT_COUNT = 48;
+        let timeIsDragging = false;
+        let timeDragSelectState = true;
+        let modsIsDragging = false;
+        let modsDragSelectState = true;
 
-    function timeSlotKey(dayIndex, slotIndex) {
-        return `${dayIndex}-${slotIndex}`;
-    }
+        function timeSlotKey(dayIndex, slotIndex) {
+            return `${dayIndex}-${slotIndex}`;
+        }
 
-    function isTimeSlotSelected(dayIndex, slotIndex) {
-        return timeSelectedSlots.has(timeSlotKey(dayIndex, slotIndex));
-    }
+        function isTimeSlotSelected(dayIndex, slotIndex) {
+            return timeSelectedSlots.has(timeSlotKey(dayIndex, slotIndex));
+        }
 
-    function getTimeSelectedCount() {
-        return timeSelectedSlots.size;
-    }
+        function getTimeSelectedCount() {
+            return timeSelectedSlots.size;
+        }
 
-    function getTimeRanges() {
-        const ranges = [];
-        for (let day = 0; day < 7; day += 1) {
-            const slots = [];
-            for (let slot = 0; slot < TIME_SLOT_COUNT; slot += 1) {
-                if (isTimeSlotSelected(day, slot)) slots.push(slot);
-            }
-            if (slots.length === 0) continue;
+        function getTimeRanges() {
+            const ranges = [];
+            for (let day = 0; day < 7; day += 1) {
+                const slots = [];
+                for (let slot = 0; slot < TIME_SLOT_COUNT; slot += 1) {
+                    if (isTimeSlotSelected(day, slot)) slots.push(slot);
+                }
+                if (slots.length === 0) continue;
 
-            let start = slots[0];
-            let prev = slots[0];
-            for (let i = 1; i < slots.length; i += 1) {
-                const s = slots[i];
-                if (s === prev + 1) {
+                let start = slots[0];
+                let prev = slots[0];
+                for (let i = 1; i < slots.length; i += 1) {
+                    const s = slots[i];
+                    if (s === prev + 1) {
+                        prev = s;
+                        continue;
+                    }
+                    ranges.push({day, startSlot: start, endSlotExclusive: prev + 1});
+                    start = s;
                     prev = s;
-                    continue;
                 }
                 ranges.push({day, startSlot: start, endSlotExclusive: prev + 1});
-                start = s;
-                prev = s;
             }
-            ranges.push({day, startSlot: start, endSlotExclusive: prev + 1});
+            return ranges;
         }
-        return ranges;
-    }
 
-    function getNextWeekdayTimestamp(dayIndex, slotIndex) {
-        const now = new Date();
-        const currentDayIndex = (now.getDay() + 6) % 7; // Mon=0
-        const daysAhead = (dayIndex - currentDayIndex + 7) % 7;
-        const target = new Date(now);
-        const hour = Math.floor(slotIndex / 2);
-        const minute = (slotIndex % 2) * 30;
-        target.setHours(hour, minute, 0, 0);
-        target.setDate(target.getDate() + daysAhead);
+        function getNextWeekdayTimestamp(dayIndex, slotIndex) {
+            const now = new Date();
+            const currentDayIndex = (now.getDay() + 6) % 7; // Mon=0
+            const daysAhead = (dayIndex - currentDayIndex + 7) % 7;
+            const target = new Date(now);
+            const hour = Math.floor(slotIndex / 2);
+            const minute = (slotIndex % 2) * 30;
+            target.setHours(hour, minute, 0, 0);
+            target.setDate(target.getDate() + daysAhead);
 
-        if (daysAhead === 0 && target.getTime() <= now.getTime()) {
-            target.setDate(target.getDate() + 7);
-        }
-        return Math.floor(target.getTime() / 1000);
-    }
-
-    function formatDiscordTimeTag(unixTs) {
-        return `<t:${unixTs}:t>`;
-    }
-
-    function getTodayLocalTimestamp(hour, minute) {
-        const local = new Date();
-        local.setHours(hour, minute, 0, 0);
-        return Math.floor(local.getTime() / 1000);
-    }
-
-    function getAutoTimezoneLabel() {
-        let zone = "Local";
-        try {
-            zone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Local";
-        } catch (_) {}
-
-        const offsetMinutes = -new Date().getTimezoneOffset();
-        const sign = offsetMinutes >= 0 ? "+" : "-";
-        const abs = Math.abs(offsetMinutes);
-        const hh = String(Math.floor(abs / 60)).padStart(2, "0");
-        const mm = String(abs % 60).padStart(2, "0");
-        return `${zone} (UTC${sign}${hh}:${mm})`;
-    }
-
-    function buildAvailabilityLines() {
-        const ranges = getTimeRanges();
-        return ranges.map((r) => {
-            const startTs = getNextWeekdayTimestamp(r.day, r.startSlot);
-            const endTs = getNextWeekdayTimestamp(r.day, r.endSlotExclusive);
-            return `${DAY_NAMES[r.day]} ${formatDiscordTimeTag(startTs)} - ${formatDiscordTimeTag(endTs)}`;
-        });
-    }
-
-    function renderTimeGrid() {
-        const table = el("q-time-table");
-        if (!table) return;
-        table.innerHTML = "";
-
-        const header = document.createElement("div");
-        header.className = "availability-header";
-        const emptyHead = document.createElement("div");
-        emptyHead.className = "availability-label";
-        emptyHead.textContent = "Time";
-        header.appendChild(emptyHead);
-
-        for (let day = 0; day < 7; day += 1) {
-            const head = document.createElement("div");
-            head.className = "availability-hour";
-            head.textContent = DAY_NAMES[day].slice(0, 3);
-            header.appendChild(head);
-        }
-        table.appendChild(header);
-
-        for (let slot = 0; slot < TIME_SLOT_COUNT; slot += 1) {
-            const row = document.createElement("div");
-            row.className = "availability-row";
-
-            const label = document.createElement("div");
-            label.className = "availability-label";
-            if (slot % 2 === 0) {
-                const h = Math.floor(slot / 2);
-                label.textContent = `${String(h).padStart(2, "0")}:00`;
-            } else {
-                label.textContent = "";
+            if (daysAhead === 0 && target.getTime() <= now.getTime()) {
+                target.setDate(target.getDate() + 7);
             }
-            row.appendChild(label);
-
-            for (let dayIndex = 0; dayIndex < 7; dayIndex += 1) {
-                const cell = document.createElement("button");
-                cell.type = "button";
-                cell.className = "availability-cell";
-                if (isTimeSlotSelected(dayIndex, slot)) cell.classList.add("active");
-                cell.dataset.day = String(dayIndex);
-                cell.dataset.slot = String(slot);
-                const h = Math.floor(slot / 2);
-                const m = slot % 2 === 0 ? "00" : "30";
-                cell.title = `${DAY_NAMES[dayIndex]} ${String(h).padStart(2, "0")}:${m}`;
-                cell.addEventListener("mousedown", (evt) => {
-                    evt.preventDefault();
-                    const key = timeSlotKey(dayIndex, slot);
-                    timeDragSelectState = !timeSelectedSlots.has(key);
-                    if (timeDragSelectState) timeSelectedSlots.add(key);
-                    else timeSelectedSlots.delete(key);
-                    timeIsDragging = true;
-                    markTouched("q-time");
-                    renderOutput();
-                });
-                cell.addEventListener("mouseenter", () => {
-                    if (!timeIsDragging) return;
-                    const key = timeSlotKey(dayIndex, slot);
-                    if (timeDragSelectState) timeSelectedSlots.add(key);
-                    else timeSelectedSlots.delete(key);
-                    markTouched("q-time");
-                    renderOutput();
-                });
-                row.appendChild(cell);
-            }
-
-            table.appendChild(row);
-        }
-    }
-
-    function setModsCheckboxState(node, state) {
-        if (!node || node.checked === state) return;
-        node.checked = state;
-        node.dispatchEvent(new Event("change", {bubbles: true}));
-    }
-
-    function initModsDragSelection() {
-        document.querySelectorAll("#q-mods-wrap .plain-option").forEach((option) => {
-            const checkbox = option.querySelector('input[type="checkbox"]');
-            if (!checkbox) return;
-
-            option.addEventListener("mousedown", (evt) => {
-                evt.preventDefault();
-                modsDragSelectState = !checkbox.checked;
-                modsIsDragging = true;
-                setModsCheckboxState(checkbox, modsDragSelectState);
-            });
-
-            option.addEventListener("click", (evt) => {
-                // Prevent native label->checkbox toggle, we already toggle on mousedown.
-                evt.preventDefault();
-            });
-
-            option.addEventListener("mouseenter", () => {
-                if (!modsIsDragging) return;
-                setModsCheckboxState(checkbox, modsDragSelectState);
-            });
-        });
-    }
-
-    function validateTime() {
-        if (getTimeSelectedCount() === 0) return "Select at least one availability slot.";
-        return "";
-    }
-
-    function validateMods() {
-        return "";
-    }
-
-    function validateAfsc() {
-        const afsc = String(el("q-afsc").value || "").trim();
-        const details = sanitizeValue(el("q-afsc-note").value);
-        if (!afsc) return "Select an AFSC.";
-        if (!details) return "This field is required.";
-        return "";
-    }
-
-    function validateEnglish(value) {
-        const n = Number(value);
-        if (!Number.isFinite(n) || n < 1 || n > 10) return "Pick a value from 1 to 10.";
-        return "";
-    }
-
-    function validateCheckbox(checked) {
-        return checked ? "" : "This confirmation is required.";
-    }
-
-    function getFieldError(id) {
-        const node = el(id);
-
-        if (id === "q-name") return validateName(node.value);
-        if (id === "q-steamid") return validateSteamID64(node.value);
-        if (id === "q-hours") return validateHours(node.value);
-        if (id === "q-time") return validateTime();
-        if (id === "q-mods") return validateMods();
-        if (id === "q-afsc-note") return validateAfsc();
-        if (id === "q-english") return validateEnglish(node.value);
-        if (checkboxIds.includes(id)) return validateCheckbox(node.checked);
-        return validateRequiredText(node.value);
-    }
-
-    function setFieldErrorUI(id, message) {
-        const field = el(`field-${id}`);
-        const err = el(`err-${id}`);
-
-        const shouldShow = touched.has(id) && !!message;
-        err.textContent = shouldShow ? message : "";
-        field.classList.toggle("invalid", shouldShow);
-    }
-
-    function validateAllAndRenderErrors() {
-        let allValid = true;
-
-        for (const id of allIds) {
-            const errMsg = getFieldError(id);
-            if (errMsg) allValid = false;
-            setFieldErrorUI(id, errMsg);
+            return Math.floor(target.getTime() / 1000);
         }
 
-        return allValid;
-    }
-
-    function buildAnswerText() {
-        // Only call this when valid.
-        const lines = [];
-
-        const qName = sanitizeValue(el("q-name").value);
-        const qSteamid = sanitizeValue(el("q-steamid").value);
-        const qHours = String(el("q-hours").value).trim();
-        const qHistory = sanitizeValue(el("q-history").value);
-        const qUnits = sanitizeValue(el("q-units").value);
-        const qGames = sanitizeValue(el("q-games").value);
-        const timeRanges = buildAvailabilityLines();
-        const qTimeNote = sanitizeValue(el("q-time-note").value);
-        const qModsList = getCheckedValues("q-mods");
-        const qModsNote = sanitizeValue(el("q-mods-note").value);
-        const qModsText = qModsList.length ? qModsList.join(", ") : "None";
-        const qAfscNote = sanitizeValue(el("q-afsc-note").value);
-        const qEnglish = String(el("q-english").value).trim();
-
-        const qAfscCode = sanitizeValue(el("q-afsc").value);
-        const qAfscName = sanitizeValue(el("q-afsc-name").value);
-        const qAfscRole = qAfscName ? `${qAfscCode} ${qAfscName}` : qAfscCode;
-
-        const codeblock = (text:string) => (`\`\`\`` + text + `\`\`\``);
-
-        lines.push(`\`${qName}\` \`${qHours}hrs\` \`${qAfscRole}\``);
-        lines.push(`\`${qSteamid}\` \`${qEnglish}/10\``)
-
-        lines.push("### Availability");
-        timeRanges.forEach(range => lines.push(range));
-
-        if (qTimeNote) lines.push(qTimeNote);
-
-        lines.push("### Mod Familiarity");
-        lines.push(qModsText);
-        if (qModsNote) lines.push(qModsNote);
-
-        lines.push("### Current Units");
-        lines.push(qUnits);
-
-        lines.push("### Arma Experience");
-        lines.push(qHistory);
-
-        lines.push("### AFSC Expirience");
-        lines.push(qAfscNote);
-
-        lines.push("### Other Games");
-        lines.push(qGames);
-
-        lines.push("-# I understood and agreed to all other questions and disclaimers");
-
-        return lines.join("\n");
-    }
-    // Split text by lines while keeping chunks under Discord limit.
-    function splitForDiscordByQuestion(text, limit = DISCORD_LIMIT) {
-        if (!text) return [];
-
-        const blocks = text.split("\n");
-        const chunks = [];
-        let current = "";
-
-        function pushCurrent() {
-            if (current.trim()) chunks.push(current);
-            current = "";
+        function formatDiscordTimeTag(unixTs) {
+            return `<t:${unixTs}:t>`;
         }
 
-        function splitOversizedBlock(block) {
-            // Try line-based splitting first
-            const out = [];
-            const lines = block.split("\n");
-            let temp = "";
-
-            for (const line of lines) {
-                const candidate = temp ? `${temp}\n${line}` : line;
-                if (candidate.length <= limit) {
-                    temp = candidate;
-                    continue;
-                }
-
-                if (temp) {
-                    out.push(temp);
-                    temp = "";
-                }
-
-                if (line.length <= limit) {
-                    temp = line;
-                    continue;
-                }
-
-                // Hard split only if a single line is too long (last resort)
-                let remaining = line;
-                while (remaining.length > limit) {
-                    // Prefer splitting on a space before limit
-                    let cut = remaining.lastIndexOf(" ", limit);
-                    if (cut <= 0) cut = limit;
-                    out.push(remaining.slice(0, cut));
-                    remaining = remaining.slice(cut).trimStart();
-                }
-                if (remaining) temp = remaining;
-            }
-
-            if (temp) out.push(temp);
-            return out;
+        function getTodayLocalTimestamp(hour, minute) {
+            const local = new Date();
+            local.setHours(hour, minute, 0, 0);
+            return Math.floor(local.getTime() / 1000);
         }
 
-        for (const block of blocks) {
-            if (!block.trim()) continue;
-
-            if (block.length > limit) {
-                // flush current first, then split this one question block
-                if (current) pushCurrent();
-                const parts = splitOversizedBlock(block);
-                parts.forEach(p => chunks.push(p));
-                continue;
-            }
-
-            const candidate = current ? `${current}\n${block}` : block;
-            if (candidate.length <= limit) {
-                current = candidate;
-            } else {
-                pushCurrent();
-                current = block;
-            }
-        }
-
-        pushCurrent();
-        return chunks;
-    }
-
-    async function copyText(text) {
-        try {
-            await navigator.clipboard.writeText(text);
-            return true;
-        } catch (err) {
-            const ta = document.createElement("textarea");
-            ta.value = text;
-            ta.style.position = "fixed";
-            ta.style.left = "-9999px";
-            document.body.appendChild(ta);
-            ta.focus();
-            ta.select();
-            let ok = false;
+        function getAutoTimezoneLabel() {
+            let zone = "Local";
             try {
-                ok = document.execCommand("copy");
+                zone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Local";
             } catch (_) {
             }
-            document.body.removeChild(ta);
-            return ok;
-        }
-    }
 
-    function renderOutput() {
-        renderTimeGrid();
-        renderEnglishScale();
-        autoResizeAll();
-        updateInlineClearButtons();
-
-        const allValid = validateAllAndRenderErrors();
-        const container = el("chunksContainer");
-        const stats = el("statsBadge");
-        const bottomError = el("formBottomError");
-
-        container.innerHTML = "";
-
-        if (!allValid) {
-            stats.textContent = "Waiting for all required answers";
-            bottomError.classList.remove("hidden");
-            return;
+            const offsetMinutes = -new Date().getTimezoneOffset();
+            const sign = offsetMinutes >= 0 ? "+" : "-";
+            const abs = Math.abs(offsetMinutes);
+            const hh = String(Math.floor(abs / 60)).padStart(2, "0");
+            const mm = String(abs % 60).padStart(2, "0");
+            return `${zone} (UTC${sign}${hh}:${mm})`;
         }
 
-        const text = buildAnswerText();
-        const chunks = splitForDiscordByQuestion(text, DISCORD_LIMIT);
-
-        chunks.forEach((chunk, index) => {
-            const wrapper = document.createElement("div");
-            wrapper.className = "chunk";
-
-            const top = document.createElement("div");
-            top.className = "chunk-top";
-
-            const left = document.createElement("div");
-            left.className = "meta";
-            left.textContent = `Message ${index + 1}/${chunks.length} • ${chunk.length}/${DISCORD_LIMIT} chars`;
-
-            const btn = document.createElement("button");
-            btn.type = "button";
-            btn.className = "secondary";
-            btn.textContent = "Copy";
-            btn.style.padding = "6px var(--space-2-5)";
-            btn.style.fontSize = "0.85rem";
-
-            btn.addEventListener("click", async () => {
-                const ok = await copyText(chunk);
-                btn.textContent = ok ? "Copied!" : "Copy failed";
-                setTimeout(() => (btn.textContent = "Copy"), 1200);
+        function buildAvailabilityLines() {
+            const ranges = getTimeRanges();
+            return ranges.map((r) => {
+                const startTs = getNextWeekdayTimestamp(r.day, r.startSlot);
+                const endTs = getNextWeekdayTimestamp(r.day, r.endSlotExclusive);
+                return `${DAY_NAMES[r.day]} ${formatDiscordTimeTag(startTs)} - ${formatDiscordTimeTag(endTs)}`;
             });
+        }
 
-            top.appendChild(left);
-            top.appendChild(btn);
+        function renderTimeGrid() {
+            const table = el("q-time-table");
+            if (!table) return;
+            table.innerHTML = "";
 
-            const pre = document.createElement("pre");
-            pre.textContent = chunk;
+            const header = document.createElement("div");
+            header.className = "availability-header";
+            const emptyHead = document.createElement("div");
+            emptyHead.className = "availability-label";
+            emptyHead.textContent = "Time";
+            header.appendChild(emptyHead);
 
-            wrapper.appendChild(top);
-            wrapper.appendChild(pre);
-            container.appendChild(wrapper);
-        });
+            for (let day = 0; day < 7; day += 1) {
+                const head = document.createElement("div");
+                head.className = "availability-hour";
+                head.textContent = DAY_NAMES[day].slice(0, 3);
+                header.appendChild(head);
+            }
+            table.appendChild(header);
 
-        stats.textContent = `${chunks.length} message(s) • Total ${text.length} chars • Limit ${DISCORD_LIMIT}`;
-        bottomError.classList.add("hidden");
-    }
+            for (let slot = 0; slot < TIME_SLOT_COUNT; slot += 1) {
+                const row = document.createElement("div");
+                row.className = "availability-row";
 
-    function markTouched(id) {
-        touched.add(id);
-    }
-
-    function updateInlineClearButtons() {
-        inlineClearFieldIds.forEach((id) => {
-            const wrap = document.querySelector(`[data-inline-wrap="${id}"]`);
-            const node = el(id);
-            if (!wrap || !node) return;
-            const value = String(node.value ?? "").trim();
-            wrap.classList.toggle("has-value", value.length > 0);
-        });
-    }
-
-    function updateEnglishValue() {
-        const out = el("q-english-value");
-        if (out) out.textContent = String(el("q-english").value || "1");
-    }
-
-    function updateAfscUI() {
-        const trigger = el("q-afsc-trigger");
-        const code = String(el("q-afsc").value || "").trim();
-        const name = String(el("q-afsc-name").value || "").trim();
-        trigger.textContent = code ? `${code} - ${name}` : "Select AFSC";
-    }
-
-    function fillExampleAnswers() {
-        const setFromPlaceholder = (id) => {
-            const node = el(id);
-            if (!node) return;
-            const placeholder = node.getAttribute("placeholder");
-            if (typeof placeholder === "string" && placeholder.length > 0) {
-                if (id === "q-afsc-note") {
-                    const parts = placeholder.split("\n");
-                    node.value = parts.length > 1 ? parts.slice(1).join("\n").trim() : placeholder;
+                const label = document.createElement("div");
+                label.className = "availability-label";
+                if (slot % 2 === 0) {
+                    const h = Math.floor(slot / 2);
+                    label.textContent = `${String(h).padStart(2, "0")}:00`;
                 } else {
-                    node.value = placeholder;
+                    label.textContent = "";
+                }
+                row.appendChild(label);
+
+                for (let dayIndex = 0; dayIndex < 7; dayIndex += 1) {
+                    const cell = document.createElement("button");
+                    cell.type = "button";
+                    cell.className = "availability-cell";
+                    if (isTimeSlotSelected(dayIndex, slot)) cell.classList.add("active");
+                    cell.dataset.day = String(dayIndex);
+                    cell.dataset.slot = String(slot);
+                    const h = Math.floor(slot / 2);
+                    const m = slot % 2 === 0 ? "00" : "30";
+                    cell.title = `${DAY_NAMES[dayIndex]} ${String(h).padStart(2, "0")}:${m}`;
+                    cell.addEventListener("mousedown", (evt) => {
+                        evt.preventDefault();
+                        const key = timeSlotKey(dayIndex, slot);
+                        timeDragSelectState = !timeSelectedSlots.has(key);
+                        if (timeDragSelectState) timeSelectedSlots.add(key);
+                        else timeSelectedSlots.delete(key);
+                        timeIsDragging = true;
+                        markTouched("q-time");
+                        renderOutput();
+                    });
+                    cell.addEventListener("mouseenter", () => {
+                        if (!timeIsDragging) return;
+                        const key = timeSlotKey(dayIndex, slot);
+                        if (timeDragSelectState) timeSelectedSlots.add(key);
+                        else timeSelectedSlots.delete(key);
+                        markTouched("q-time");
+                        renderOutput();
+                    });
+                    row.appendChild(cell);
+                }
+
+                table.appendChild(row);
+            }
+        }
+
+        function setModsCheckboxState(node, state) {
+            if (!node || node.checked === state) return;
+            node.checked = state;
+            node.dispatchEvent(new Event("change", {bubbles: true}));
+        }
+
+        function initModsDragSelection() {
+            document.querySelectorAll("#q-mods-wrap .plain-option").forEach((option) => {
+                const checkbox = option.querySelector('input[type="checkbox"]');
+                if (!checkbox) return;
+
+                option.addEventListener("mousedown", (evt) => {
+                    evt.preventDefault();
+                    modsDragSelectState = !checkbox.checked;
+                    modsIsDragging = true;
+                    setModsCheckboxState(checkbox, modsDragSelectState);
+                });
+
+                option.addEventListener("click", (evt) => {
+                    // Prevent native label->checkbox toggle, we already toggle on mousedown.
+                    evt.preventDefault();
+                });
+
+                option.addEventListener("mouseenter", () => {
+                    if (!modsIsDragging) return;
+                    setModsCheckboxState(checkbox, modsDragSelectState);
+                });
+            });
+        }
+
+        function validateTime() {
+            if (getTimeSelectedCount() === 0) return "Select at least one availability slot.";
+            return "";
+        }
+
+        function validateMods() {
+            return "";
+        }
+
+        function validateAfsc() {
+            const afsc = String(el("q-afsc").value || "").trim();
+            const details = sanitizeValue(el("q-afsc-note").value);
+            if (!afsc) return "Select an AFSC.";
+            if (!details) return "This field is required.";
+            return "";
+        }
+
+        function validateEnglish(value) {
+            const n = Number(value);
+            if (!Number.isFinite(n) || n < 1 || n > 10) return "Pick a value from 1 to 10.";
+            return "";
+        }
+
+        function validateCheckbox(checked) {
+            return checked ? "" : "This confirmation is required.";
+        }
+
+        function getFieldError(id) {
+            const node = el(id);
+
+            if (id === "q-name") return validateName(node.value);
+            if (id === "q-steamid") return validateSteamID64(node.value);
+            if (id === "q-hours") return validateHours(node.value);
+            if (id === "q-time") return validateTime();
+            if (id === "q-mods") return validateMods();
+            if (id === "q-afsc-note") return validateAfsc();
+            if (id === "q-english") return validateEnglish(node.value);
+            if (checkboxIds.includes(id)) return validateCheckbox(node.checked);
+            return validateRequiredText(node.value);
+        }
+
+        function setFieldErrorUI(id, message) {
+            const field = el(`field-${id}`);
+            const err = el(`err-${id}`);
+
+            const shouldShow = touched.has(id) && !!message;
+            err.textContent = shouldShow ? message : "";
+            field.classList.toggle("invalid", shouldShow);
+        }
+
+        function validateAllAndRenderErrors() {
+            let allValid = true;
+
+            for (const id of allIds) {
+                const errMsg = getFieldError(id);
+                if (errMsg) allValid = false;
+                setFieldErrorUI(id, errMsg);
+            }
+
+            return allValid;
+        }
+
+        function buildAnswerText() {
+            // Only call this when valid.
+            const lines = [];
+
+            const qName = sanitizeValue(el("q-name").value);
+            const qSteamid = sanitizeValue(el("q-steamid").value);
+            const qHours = String(el("q-hours").value).trim();
+            const qHistory = sanitizeValue(el("q-history").value);
+            const qUnits = sanitizeValue(el("q-units").value);
+            const qGames = sanitizeValue(el("q-games").value);
+            const timeRanges = buildAvailabilityLines();
+            const qTimeNote = sanitizeValue(el("q-time-note").value);
+            const qModsList = getCheckedValues("q-mods");
+            const qModsNote = sanitizeValue(el("q-mods-note").value);
+            const qModsText = qModsList.length ? qModsList.join(", ") : "None";
+            const qAfscNote = sanitizeValue(el("q-afsc-note").value);
+            const qEnglish = String(el("q-english").value).trim();
+
+            const qAfscCode = sanitizeValue(el("q-afsc").value);
+            const qAfscName = sanitizeValue(el("q-afsc-name").value);
+            const qAfscRole = qAfscName ? `${qAfscCode} ${qAfscName}` : qAfscCode;
+
+            const codeblock = (text: string) => (`\`\`\`` + text + `\`\`\``);
+
+            lines.push(`\`${qName}\` \`${qHours}hrs\` \`${qAfscRole}\``);
+            lines.push(`\`${qSteamid}\` \`${qEnglish}/10\``)
+
+            lines.push("### Availability");
+            timeRanges.forEach(range => lines.push(range));
+
+            if (qTimeNote) lines.push(qTimeNote);
+
+            lines.push("### Mod Familiarity");
+            lines.push(qModsText);
+            if (qModsNote) lines.push(qModsNote);
+
+            lines.push("### Current Units");
+            lines.push(qUnits);
+
+            lines.push("### Arma Experience");
+            lines.push(qHistory);
+
+            lines.push("### AFSC Expirience");
+            lines.push(qAfscNote);
+
+            lines.push("### Other Games");
+            lines.push(qGames);
+
+            lines.push("-# I understood and agreed to all other questions and disclaimers");
+
+            return lines.join("\n");
+        }
+
+        // Split text by lines while keeping chunks under Discord limit.
+        function splitForDiscordByQuestion(text, limit = DISCORD_LIMIT) {
+            if (!text) return [];
+
+            const blocks = text.split("\n");
+            const chunks = [];
+            let current = "";
+
+            function pushCurrent() {
+                if (current.trim()) chunks.push(current);
+                current = "";
+            }
+
+            function splitOversizedBlock(block) {
+                // Try line-based splitting first
+                const out = [];
+                const lines = block.split("\n");
+                let temp = "";
+
+                for (const line of lines) {
+                    const candidate = temp ? `${temp}\n${line}` : line;
+                    if (candidate.length <= limit) {
+                        temp = candidate;
+                        continue;
+                    }
+
+                    if (temp) {
+                        out.push(temp);
+                        temp = "";
+                    }
+
+                    if (line.length <= limit) {
+                        temp = line;
+                        continue;
+                    }
+
+                    // Hard split only if a single line is too long (last resort)
+                    let remaining = line;
+                    while (remaining.length > limit) {
+                        // Prefer splitting on a space before limit
+                        let cut = remaining.lastIndexOf(" ", limit);
+                        if (cut <= 0) cut = limit;
+                        out.push(remaining.slice(0, cut));
+                        remaining = remaining.slice(cut).trimStart();
+                    }
+                    if (remaining) temp = remaining;
+                }
+
+                if (temp) out.push(temp);
+                return out;
+            }
+
+            for (const block of blocks) {
+                if (!block.trim()) continue;
+
+                if (block.length > limit) {
+                    // flush current first, then split this one question block
+                    if (current) pushCurrent();
+                    const parts = splitOversizedBlock(block);
+                    parts.forEach(p => chunks.push(p));
+                    continue;
+                }
+
+                const candidate = current ? `${current}\n${block}` : block;
+                if (candidate.length <= limit) {
+                    current = candidate;
+                } else {
+                    pushCurrent();
+                    current = block;
                 }
             }
-        };
 
-        ["q-name", "q-steamid", "q-hours", "q-history", "q-units", "q-games", "q-afsc-note"].forEach(setFromPlaceholder);
+            pushCurrent();
+            return chunks;
+        }
 
-        el("q-dualclan").checked = true;
-
-        timeSelectedSlots.clear();
-        for (let slot = 36; slot < 44; slot += 1) timeSelectedSlots.add(timeSlotKey(0, slot)); // Monday 18:00-22:00
-        for (let slot = 38; slot < 46; slot += 1) timeSelectedSlots.add(timeSlotKey(3, slot)); // Thursday 19:00-23:00
-        for (let slot = 34; slot < 42; slot += 1) timeSelectedSlots.add(timeSlotKey(5, slot)); // Saturday 17:00-21:00
-        el("q-time-note").value = "Usually free in the evenings. Some weekdays may vary due to work, but weekends are mostly consistent.";
-
-        const modsDefaults = new Set(["ACE", "TFAR", "ACRE"]);
-        document.querySelectorAll('input[name="q-mods"]').forEach((node) => {
-            node.checked = modsDefaults.has(node.value);
-        });
-        el("q-mods-note").value = "I haven't played with ACRE since long ago, but should be able to use it. Im very familiar with KAT, but ACM only on a basic level.";
-
-        el("q-afsc").value = "11HX";
-        el("q-afsc-name").value = "Rescue Pilot";
-        el("q-downtime").checked = true;
-        el("q-english").value = "8";
-        el("q-inactivity").checked = true;
-        el("q-represent").checked = true;
-
-        allIds.forEach((id) => touched.add(id));
-        updateAfscUI();
-        closeAfscDropdown();
-        renderOutput();
-    }
-
-    function closeAfscDropdown() {
-        el("q-afsc-select").classList.remove("open");
-    }
-
-    function initAfscDropdown() {
-        const select = el("q-afsc-select");
-        const trigger = el("q-afsc-trigger");
-
-        trigger.addEventListener("click", () => {
-            select.classList.toggle("open");
-        });
-
-        select.querySelectorAll(".discord-select-option").forEach((btn) => {
-            btn.addEventListener("click", () => {
-                el("q-afsc").value = btn.dataset.afsc || "";
-                el("q-afsc-name").value = btn.dataset.afscName || "";
-                markTouched("q-afsc-note");
-                closeAfscDropdown();
-                updateAfscUI();
-                renderOutput();
-            });
-        });
-
-        document.addEventListener("click", (evt) => {
-            if (!select.contains(evt.target)) closeAfscDropdown();
-        });
-    }
-
-    function renderEnglishScale() {
-        updateEnglishValue();
-        const selected = String(el("q-english").value || "1");
-        document.querySelectorAll(".q10-box").forEach((btn) => {
-            btn.classList.toggle("active", btn.dataset.q10Score === selected);
-        });
-    }
-
-    function attachFieldTracking(id) {
-        const node = el(id);
-        const isCheckbox = node.type === "checkbox";
-
-        const mark = () => {
-            markTouched(id);
-            renderOutput();
-        };
-
-        if (isCheckbox) {
-            node.addEventListener("change", mark);
-            node.addEventListener("blur", () => {
-                markTouched(id);
-                renderOutput();
-            });
-        } else {
-            node.addEventListener("input", () => {
-                if (node.id === "q-name" && node.value.length > 32) {
-                    node.value = node.value.slice(0, 32);
+        async function copyText(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                return true;
+            } catch (err) {
+                const ta = document.createElement("textarea");
+                ta.value = text;
+                ta.style.position = "fixed";
+                ta.style.left = "-9999px";
+                document.body.appendChild(ta);
+                ta.focus();
+                ta.select();
+                let ok = false;
+                try {
+                    ok = document.execCommand("copy");
+                } catch (_) {
                 }
-                renderOutput();
+                document.body.removeChild(ta);
+                return ok;
+            }
+        }
+
+        function renderOutput() {
+            renderTimeGrid();
+            renderEnglishScale();
+            autoResizeAll();
+            updateInlineClearButtons();
+
+            const allValid = validateAllAndRenderErrors();
+            const container = el("chunksContainer");
+            const stats = el("statsBadge");
+            const bottomError = el("formBottomError");
+
+            container.innerHTML = "";
+
+            if (!allValid) {
+                stats.textContent = "Waiting for all required answers";
+                bottomError.classList.remove("hidden");
+                return;
+            }
+
+            const text = buildAnswerText();
+            const chunks = splitForDiscordByQuestion(text, DISCORD_LIMIT);
+
+            chunks.forEach((chunk, index) => {
+                const wrapper = document.createElement("div");
+                wrapper.className = "chunk";
+
+                const top = document.createElement("div");
+                top.className = "chunk-top";
+
+                const left = document.createElement("div");
+                left.className = "meta";
+                left.textContent = `Message ${index + 1}/${chunks.length} • ${chunk.length}/${DISCORD_LIMIT} chars`;
+
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "secondary";
+                btn.textContent = "Copy";
+                btn.style.padding = "6px var(--space-2-5)";
+                btn.style.fontSize = "0.85rem";
+
+                btn.addEventListener("click", async () => {
+                    const ok = await copyText(chunk);
+                    btn.textContent = ok ? "Copied!" : "Copy failed";
+                    setTimeout(() => (btn.textContent = "Copy"), 1200);
+                });
+
+                top.appendChild(left);
+                top.appendChild(btn);
+
+                const pre = document.createElement("pre");
+                pre.textContent = chunk;
+
+                wrapper.appendChild(top);
+                wrapper.appendChild(pre);
+                container.appendChild(wrapper);
             });
-            node.addEventListener("blur", () => {
-                markTouched(id);
-                renderOutput();
+
+            stats.textContent = `${chunks.length} message(s) • Total ${text.length} chars • Limit ${DISCORD_LIMIT}`;
+            bottomError.classList.add("hidden");
+        }
+
+        function markTouched(id) {
+            touched.add(id);
+        }
+
+        function updateInlineClearButtons() {
+            inlineClearFieldIds.forEach((id) => {
+                const wrap = document.querySelector(`[data-inline-wrap="${id}"]`);
+                const node = el(id);
+                if (!wrap || !node) return;
+                const value = String(node.value ?? "").trim();
+                wrap.classList.toggle("has-value", value.length > 0);
             });
         }
-    }
 
-    function attachQuestionTracking(questionId, selectors) {
-        selectors.forEach((selector) => {
-            document.querySelectorAll(selector).forEach((node) => {
-                node.addEventListener("input", () => {
-                    markTouched(questionId);
+        function updateEnglishValue() {
+            const out = el("q-english-value");
+            if (out) out.textContent = String(el("q-english").value || "1");
+        }
+
+        function updateAfscUI() {
+            const trigger = el("q-afsc-trigger");
+            const code = String(el("q-afsc").value || "").trim();
+            const name = String(el("q-afsc-name").value || "").trim();
+            trigger.textContent = code ? `${code} - ${name}` : "Select AFSC";
+        }
+
+        function fillExampleAnswers() {
+            const setFromPlaceholder = (id) => {
+                const node = el(id);
+                if (!node) return;
+                const placeholder = node.getAttribute("placeholder");
+                if (typeof placeholder === "string" && placeholder.length > 0) {
+                    if (id === "q-afsc-note") {
+                        const parts = placeholder.split("\n");
+                        node.value = parts.length > 1 ? parts.slice(1).join("\n").trim() : placeholder;
+                    } else {
+                        node.value = placeholder;
+                    }
+                }
+            };
+
+            ["q-name", "q-steamid", "q-hours", "q-history", "q-units", "q-games", "q-afsc-note"].forEach(setFromPlaceholder);
+
+            el("q-dualclan").checked = true;
+
+            timeSelectedSlots.clear();
+            for (let slot = 36; slot < 44; slot += 1) timeSelectedSlots.add(timeSlotKey(0, slot)); // Monday 18:00-22:00
+            for (let slot = 38; slot < 46; slot += 1) timeSelectedSlots.add(timeSlotKey(3, slot)); // Thursday 19:00-23:00
+            for (let slot = 34; slot < 42; slot += 1) timeSelectedSlots.add(timeSlotKey(5, slot)); // Saturday 17:00-21:00
+            el("q-time-note").value = "Usually free in the evenings. Some weekdays may vary due to work, but weekends are mostly consistent.";
+
+            const modsDefaults = new Set(["ACE", "TFAR", "ACRE"]);
+            document.querySelectorAll('input[name="q-mods"]').forEach((node) => {
+                node.checked = modsDefaults.has(node.value);
+            });
+            el("q-mods-note").value = "I haven't played with ACRE since long ago, but should be able to use it. Im very familiar with KAT, but ACM only on a basic level.";
+
+            el("q-afsc").value = "11HX";
+            el("q-afsc-name").value = "Rescue Pilot";
+            el("q-downtime").checked = true;
+            el("q-english").value = "8";
+            el("q-inactivity").checked = true;
+            el("q-represent").checked = true;
+
+            allIds.forEach((id) => touched.add(id));
+            updateAfscUI();
+            closeAfscDropdown();
+            renderOutput();
+        }
+
+        function closeAfscDropdown() {
+            el("q-afsc-select").classList.remove("open");
+        }
+
+        function initAfscDropdown() {
+            const select = el("q-afsc-select");
+            const trigger = el("q-afsc-trigger");
+
+            trigger.addEventListener("click", () => {
+                select.classList.toggle("open");
+            });
+
+            select.querySelectorAll(".discord-select-option").forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    el("q-afsc").value = btn.dataset.afsc || "";
+                    el("q-afsc-name").value = btn.dataset.afscName || "";
+                    markTouched("q-afsc-note");
+                    closeAfscDropdown();
+                    updateAfscUI();
                     renderOutput();
                 });
-                node.addEventListener("change", () => {
-                    markTouched(questionId);
+            });
+
+            document.addEventListener("click", (evt) => {
+                if (!select.contains(evt.target)) closeAfscDropdown();
+            });
+        }
+
+        function renderEnglishScale() {
+            updateEnglishValue();
+            const selected = String(el("q-english").value || "1");
+            document.querySelectorAll(".q10-box").forEach((btn) => {
+                btn.classList.toggle("active", btn.dataset.q10Score === selected);
+            });
+        }
+
+        function attachFieldTracking(id) {
+            const node = el(id);
+            const isCheckbox = node.type === "checkbox";
+
+            const mark = () => {
+                markTouched(id);
+                renderOutput();
+            };
+
+            if (isCheckbox) {
+                node.addEventListener("change", mark);
+                node.addEventListener("blur", () => {
+                    markTouched(id);
+                    renderOutput();
+                });
+            } else {
+                node.addEventListener("input", () => {
+                    if (node.id === "q-name" && node.value.length > 32) {
+                        node.value = node.value.slice(0, 32);
+                    }
                     renderOutput();
                 });
                 node.addEventListener("blur", () => {
-                    markTouched(questionId);
+                    markTouched(id);
                     renderOutput();
                 });
+            }
+        }
+
+        function attachQuestionTracking(questionId, selectors) {
+            selectors.forEach((selector) => {
+                document.querySelectorAll(selector).forEach((node) => {
+                    node.addEventListener("input", () => {
+                        markTouched(questionId);
+                        renderOutput();
+                    });
+                    node.addEventListener("change", () => {
+                        markTouched(questionId);
+                        renderOutput();
+                    });
+                    node.addEventListener("blur", () => {
+                        markTouched(questionId);
+                        renderOutput();
+                    });
+                });
+            });
+        }
+
+        document.querySelectorAll(".inline-clear-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const id = btn.dataset.inlineClear;
+                const node = el(id);
+                if (!node) return;
+                node.value = "";
+                if (id === "q-afsc-note") {
+                    el("q-afsc").value = "";
+                    el("q-afsc-name").value = "";
+                    updateQ8AfscUI();
+                }
+                node.dispatchEvent(new Event("input", {bubbles: true}));
+                node.focus();
             });
         });
-    }
 
-    document.querySelectorAll(".inline-clear-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-            const id = btn.dataset.inlineClear;
-            const node = el(id);
-            if (!node) return;
-            node.value = "";
-            if (id === "q-afsc-note") {
-                el("q-afsc").value = "";
-                el("q-afsc-name").value = "";
-                updateQ8AfscUI();
-            }
-            node.dispatchEvent(new Event("input", {bubbles: true}));
-            node.focus();
+        document.querySelectorAll(".q10-box").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                el("q-english").value = btn.dataset.q10Score;
+                markTouched("q-english");
+                renderOutput();
+            });
         });
-    });
 
-    document.querySelectorAll(".q10-box").forEach((btn) => {
-        btn.addEventListener("click", () => {
-            el("q-english").value = btn.dataset.q10Score;
-            markTouched("q-english");
-            renderOutput();
+        el("fillExampleBtn").classList.toggle("hidden", !hasDevQueryParam);
+        el("fillExampleBtn").addEventListener("click", fillExampleAnswers);
+
+        document.addEventListener("mouseup", () => {
+            timeIsDragging = false;
+            modsIsDragging = false;
         });
-    });
 
-    el("fillExampleBtn").classList.toggle("hidden", !hasDevQueryParam);
-    el("fillExampleBtn").addEventListener("click", fillExampleAnswers);
+        // Init field listeners
+        ["q-name", "q-steamid", "q-hours", "q-history", "q-units", "q-dualclan", "q-games", "q-downtime", "q-inactivity", "q-represent"].forEach(attachFieldTracking);
+        attachQuestionTracking("q-time", ["#q-time-note"]);
+        attachQuestionTracking("q-mods", ["#q-mods-note", 'input[name="q-mods"]']);
+        attachQuestionTracking("q-afsc-note", ["#q-afsc-note"]);
+        initModsDragSelection();
+        initAfscDropdown();
 
-    document.addEventListener("mouseup", () => {
-        timeIsDragging = false;
-        modsIsDragging = false;
-    });
+        textFieldIds.forEach(id => {
+            const ta = el(id);
+            autoResizeTextarea(ta);
+            ta.addEventListener("input", () => autoResizeTextarea(ta));
+        });
 
-    // Init field listeners
-    ["q-name", "q-steamid", "q-hours", "q-history", "q-units", "q-dualclan", "q-games", "q-downtime", "q-inactivity", "q-represent"].forEach(attachFieldTracking);
-    attachQuestionTracking("q-time", ["#q-time-note"]);
-    attachQuestionTracking("q-mods", ["#q-mods-note", 'input[name="q-mods"]']);
-    attachQuestionTracking("q-afsc-note", ["#q-afsc-note"]);
-    initModsDragSelection();
-    initAfscDropdown();
+        updateEnglishValue();
+        updateAfscUI();
 
-    textFieldIds.forEach(id => {
-        const ta = el(id);
-        autoResizeTextarea(ta);
-        ta.addEventListener("input", () => autoResizeTextarea(ta));
-    });
-
-    updateEnglishValue();
-    updateAfscUI();
-
-    // Initial render (no output until valid)
-    renderOutput();
-</script>
-</body>
-</html>
+        // Initial render (no output until valid)
+        renderOutput();
+    </script>
+</RawLayout>

@@ -1,47 +1,42 @@
 ---
+import RawLayout from "../layouts/RawLayout.astro";
+import {withBase} from "../utils/withBase.ts";
+
+
 const inviteUrl = "https://discord.gg/YrHST8EcfC";
-const base = import.meta.env.BASE_URL;
-const withBase = (path = "") => `${base.replace(/\/?$/, "/")}${path.replace(/^\//, "")}`;
 const site = Astro.site ?? new URL("https://puotek.github.io");
 const pageUrl = new URL(withBase("discord/"), site);
 const ogImageUrl = new URL(withBase("assets/banner.png"), site);
 ---
 
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>23rd STS Discord</title>
-    <meta name="description" content="Join the 23rd Special Tactics Squadron Discord server."/>
-    <link rel="canonical" href={pageUrl.toString()}/>
+<RawLayout title="23rd STS Discord">
+    <Fragment slot="head">
+        <meta name="description" content="Join the 23rd Special Tactics Squadron Discord server."/>
+        <link rel="canonical" href={pageUrl.toString()}/>
 
-    <meta property="og:type" content="website"/>
-    <meta property="og:site_name" content="23rd Special Tactics Squadron"/>
-    <meta property="og:title" content="23rd STS Discord"/>
-    <meta property="og:description" content="Join the 23rd Special Tactics Squadron Discord server."/>
-    <meta property="og:url" content={pageUrl.toString()}/>
-    <meta property="og:image" content={ogImageUrl.toString()}/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:site_name" content="23rd Special Tactics Squadron"/>
+        <meta property="og:title" content="23rd STS Discord"/>
+        <meta property="og:description" content="Join the 23rd Special Tactics Squadron Discord server."/>
+        <meta property="og:url" content={pageUrl.toString()}/>
+        <meta property="og:image" content={ogImageUrl.toString()}/>
 
-    <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:title" content="23rd STS Discord"/>
-    <meta name="twitter:description" content="Join the 23rd Special Tactics Squadron Discord server."/>
-    <meta name="twitter:image" content={ogImageUrl.toString()}/>
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:title" content="23rd STS Discord"/>
+        <meta name="twitter:description" content="Join the 23rd Special Tactics Squadron Discord server."/>
+        <meta name="twitter:image" content={ogImageUrl.toString()}/>
 
-    <link rel="icon" href={withBase("favicon.ico")}/>
-    <script is:inline>
-        window.location.replace("https://discord.gg/YrHST8EcfC");
-    </script>
-    <noscript>
-        <meta http-equiv="refresh" content={`0;url=${inviteUrl}`}/>
-    </noscript>
-</head>
-<body>
-<main>
-    <h1>23rd STS Discord</h1>
-    <p>Join the 23rd Special Tactics Squadron Discord server.</p>
-    <p><a href={inviteUrl}>Open Discord invite</a></p>
-    <p>If Discord does not open automatically, use the link above.</p>
-</main>
-</body>
-</html>
+        <script is:inline>
+            window.location.replace("https://discord.gg/YrHST8EcfC");
+        </script>
+        <noscript>
+            <meta http-equiv="refresh" content={`0;url=${inviteUrl}`}/>
+        </noscript>
+    </Fragment>
+    <main>
+        <h1>23rd STS Discord</h1>
+        <p>Join the 23rd Special Tactics Squadron Discord server.</p>
+        <p><a href={inviteUrl}>Open Discord invite</a></p>
+        <p>If Discord does not open automatically, use the link above.</p>
+    </main>
+</RawLayout>

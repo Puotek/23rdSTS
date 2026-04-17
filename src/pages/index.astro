@@ -1,11 +1,9 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-
-const base = import.meta.env.BASE_URL;
-const withBase = (path = "") => `${base.replace(/\/?$/, "/")}${path.replace(/^\//, "")}`;
+import MainLayout from "../layouts/MainLayout.astro";
+import {withBase} from "../utils/withBase.ts";
 ---
 
-<BaseLayout activePage="home" title="23rd Special Tactics Squadron">
+<MainLayout activePage="home" title="23rd Special Tactics Squadron">
     <section
             class="banner"
             style={`background: url("${withBase("assets/banner.png")}") center / cover no-repeat fixed;`}
@@ -131,7 +129,7 @@ const withBase = (path = "") => `${base.replace(/\/?$/, "/")}${path.replace(/^\/
             </div>
         </div>
     </section>
-</BaseLayout>
+</MainLayout>
 
 <script>
     const header: HTMLElement | null = document.querySelector("header");

@@ -342,18 +342,6 @@ main {
     box-shadow: var(--shadow-button-hover);
 }
 
-.footer {
-    background: var(--color-dark-footer);
-    border-top: var(--border-light);
-    color: oklch(1 0 0 / 0.85);
-    padding: var(--space-2) var(--space-4);
-    display: flex;
-    justify-content: center;
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
 
 .overview-section {
     padding: var(--space-16) var(--space-12);
