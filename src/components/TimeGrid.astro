@@ -262,7 +262,11 @@ const DAY_LABELS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
         color: var(--tg-muted);
         font-size: 11px;
         user-select: none;
-        touch-action: none;
+        touch-action: pan-y;
+    }
+
+    .timegrid-root--readonly {
+        touch-action: auto;
     }
 
     .timegrid-header {
