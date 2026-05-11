@@ -1,153 +1,63 @@
 ---
-import MainLayout from "../layouts/MainLayout.astro";
-import {withBase} from "../utils/withBase.ts";
+const newSite = "https://23rdsts.pages.dev";
 ---
-
-<MainLayout activePage="home" title="23rd Special Tactics Squadron">
-    <Fragment slot="head">
-        <meta name="google-site-verification" content="tagtXmDNrGPtCEyLoAsCeW7i8p0cHjrBYDgZO1jgWyM" />
-        <meta name="description" content="23rd Special Tactics Squadron (23rd STS) — an Arma 3 enabler unit specializing in pararescue and Air Force Special Warfare. Join us on Discord."/>
-    </Fragment>
-    <section
-            class="banner"
-            style={`background: url("${withBase("assets/banner.png")}") center / cover no-repeat fixed;`}
-    >
-        <div class="banner-content">
-            <div class="banner-logo">
-                <img src={withBase("assets/logo.png")} alt="23rd STS Emblem"/>
-            </div>
-
-            <h1>23rd Special Tactics Squadron</h1>
-            <p class="banner-subtitle">ARMA 3 ENABLER UNIT // ESTABLISHED 2023</p>
-            <div class="banner-buttons">
-                <a class="btn btn-primary" href={withBase("apply/")}>APPLY</a>
-                <a class="btn btn-secondary" href={withBase("discord/")}>DISCORD</a>
-            </div>
-        </div>
-
-        <span class="banner-chevron material-symbols-outlined">keyboard_arrow_down</span>
-    </section>
-
-    <section class="overview-section">
-        <div class="section-block about-section">
-            <div>
-                <h2>About 23rd Special Tactics Squadron</h2>
-                <p>
-                    We are an enabler unit specializing in pararescue and Air Force Special Warfare. We integrate directly with other milsim units, either embedded with ground elements or deployed independently alongside them, to prevent casualties and restore combat initiative. While we have an STS namesake, we're not limited to STS mission sets and are equally capable in RQS mission sets.
-                    <br/><br/>
-                    Our expertise centers on the
-                    <a class="text-link" href="https://steamcommunity.com/sharedfiles/filedetails/?id=3235483358">Advanced Combat Medicine (ACM) Arma 3 mod</a>
-                    by Blue. We excel in both ACM practical application and theory, and we maintain the highest standard.
-                </p>
-            </div>
-
-            <div class="about-logo">
-                <img src={withBase("assets/logo.png")} alt="23rd STS Emblem"/>
-            </div>
-        </div>
-
-        <div class="section-block">
-            <h2>What we offer</h2>
-
-            <div class="offer-list">
-                <article class="offer-item">
-                    <p class="offer-eyebrow">PUBLIC DOCUMENTATION</p>
-                    <h3>Public Medical Documentation on ACM</h3>
-                    <p>
-                        We share our knowledge to help the player base avoid common ACM medical malpractice.
-                    </p>
-                </article>
-                <article class="offer-item">
-                    <p class="offer-eyebrow">PUBLIC LECTURES ON ACM</p>
-                    <h3>Medical School</h3>
-                    <p>
-                        We periodically host public-facing lectures on in-depth ACM topics, where we dive into the code and the inner workings of the systems that affect players during gameplay.
-                    </p>
-                </article>
-                <article class="offer-item">
-                    <p class="offer-eyebrow">TRAINING AND ADVISORY SUPPORT</p>
-                    <h3>Medical Training and Qualifications</h3>
-                    <p>
-                        We have a series of medical qualification levels that we both train for and use to test trainees' proficiency. We train partner medics through these qualifications upon request to make sure we have reliable medics in the field. We can also send our own instructors to other units to lead dedicated classes tailored to your unit.
-                    </p>
-                </article>
-
-
-                <article class="offer-item">
-                    <p class="offer-eyebrow">KAT → ACM TRANSITION SUPPORT</p>
-                    <h3>Supporting units moving from KAT to ACM</h3>
-                    <p>
-                        We can advise on settings, configuration, and important differences. We can help by hosting dedicated trainings for medics transitioning from KAT. We also help units strengthen their medical manpower during transition periods.
-                    </p>
-                </article>
-
-                <article class="offer-item">
-                    <p class="offer-eyebrow">DIRECT OPERATIONAL SUPPORT</p>
-                    <h3>Pararescue</h3>
-                    <p>
-                        We provide directly attached PJs to deployed ground elements, just like our real-life STS counterpart, as well as standby rotary CSAR and MEDEVAC elements closer to an RQS-style rescue package. That capability can be backed by our own pilots and built to integrate with other units when needed.
-                    </p>
-                </article>
-
-                <article class="offer-item">
-                    <p class="offer-eyebrow">DIRECT OPERATIONAL SUPPORT</p>
-                    <h3>Air-Ground Integration</h3>
-                    <p>
-                        Units that need terminal attack control, fires integration, or stronger coordination between ground forces and aviation can be reinforced by our Combat Control and Tactical Air Control Party personnel.
-                    </p>
-                </article>
-
-
-                <article class="offer-item">
-                    <p class="offer-eyebrow">DIRECT OPERATIONAL SUPPORT</p>
-                    <h3>CBRN Specialists</h3>
-                    <p>
-                        We can provide emergency management and contamination response capability for scenarios that require a dedicated CBRN element.
-                    </p>
-                </article>
-
-                <article class="offer-item">
-                    <p class="offer-eyebrow">DIRECT OPERATIONAL SUPPORT</p>
-                    <h3>EOD Specialists</h3>
-                    <p>
-                        We have EOD specialists trained in the IEDD Notebook mod and in the tactics and considerations of explosive ordnance disposal.
-                    </p>
-                </article>
-
-                <article class="offer-item">
-                    <p class="offer-eyebrow">DIRECT OPERATIONAL SUPPORT</p>
-                    <h3>UAV Operators</h3>
-                    <p>
-                        We can provide operators for unmanned aerial support during operations.
-                    </p>
-                </article>
-
-                <article class="offer-item">
-                    <p class="offer-eyebrow">DIRECT OPERATIONAL SUPPORT</p>
-                    <h3>Special Reconnaissance</h3>
-                    <p>
-                        Recon-focused personnel can support observation, target development, and pre-assault shaping
-                        for units that need a broader specialist package.
-                    </p>
-                </article>
-            </div>
-        </div>
-    </section>
-</MainLayout>
-
-<script>
-    const header: HTMLElement | null = document.querySelector("header");
-
-    function updateHeader(): void {
-        if (!header) return;
-
-        if (window.scrollY === 0) {
-            header.classList.add("at-top");
-        } else {
-            header.classList.remove("at-top");
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="robots" content="noindex"/>
+    <link rel="canonical" href={newSite}/>
+    <title>23rd STS — Site Retired</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: #0b0b0c;
+            color: #e8e8ea;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
-    }
-
-    updateHeader();
-    window.addEventListener("scroll", updateHeader);
-</script>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        main {
+            max-width: 36rem;
+        }
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 1rem;
+            letter-spacing: 0.02em;
+        }
+        p {
+            font-size: 1.05rem;
+            line-height: 1.5;
+            margin: 0 0 1.5rem;
+            color: #c7c7cc;
+        }
+        a {
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            transition: border-color 0.15s ease;
+        }
+        a:hover {
+            border-bottom-color: #fff;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <h1>This URL has been retired</h1>
+    <p>
+        We have moved to <a href={newSite}>23rdsts.pages.dev</a>.
+    </p>
+</main>
+</body>
+</html>

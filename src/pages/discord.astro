@@ -1,15 +1,17 @@
 ---
-import RawLayout from "../layouts/RawLayout.astro";
-const inviteUrl = "https://discord.gg/YrHST8EcfC";
+import {withBase} from "../utils/withBase.ts";
+const home = withBase("");
 ---
-
-<RawLayout title="23rd STS Discord">
-    <Fragment slot="head">
-        <script is:inline>
-            window.location.replace("https://discord.gg/YrHST8EcfC");
-        </script>
-        <noscript>
-            <meta http-equiv="refresh" content={`0;url=${inviteUrl}`}/>
-        </noscript>
-    </Fragment>
-</RawLayout>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="refresh" content={`0; url=${home}`}/>
+    <link rel="canonical" href={home}/>
+    <title>Redirecting…</title>
+</head>
+<body>
+<script set:html={`window.location.replace(${JSON.stringify(home)});`}></script>
+<p>Redirecting to <a href={home}>{home}</a>…</p>
+</body>
+</html>
